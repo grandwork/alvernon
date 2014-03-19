@@ -1,0 +1,6 @@
+<label>Email report to client</label>
+<%= text_field_tag :email %> <!--TODO this should be email_field -->
+<label for="cc" class="checkbox">
+  <%= check_box_tag :cc %> Send me a copy
+</label>
+<%= submit_tag "Send Email", :class => "btn btn-small" %>

@@ -1,0 +1,25 @@
+<div class="normal_content">
+
+	<% unless @users.any? %>
+		<h1>There are no deleted users.</h1>
+	<% end -%>
+
+ 	<div class="main_content">
+	  <div class="page_header">
+	    <h1>Deleted users:</h1>
+	  </div>
+	  <table class="condensed-table bordered-table zebra-striped">
+	    <tbody>
+	      <% @users.each do |u| %>
+	        <tr>
+	          <td><%= u.full_name %> (<%= mail_to u.email %>)</td>
+	          <td> Deleted <%= distance_of_time_in_words_to_now(u.deleted_at) %> ago</td> 
+	          <td><%= link_to "Undelete User", "/undelete_user/#{u.id}", method: :post, confirm: "Are you sure?", :class => "btn btn-mini btn-success" %></td>
+	        </tr>
+	      <% end %>
+	    </tbody>
+	  </table>
+	</div>  
+</div>
+
+<%= render 'shared/generic_modal' %>

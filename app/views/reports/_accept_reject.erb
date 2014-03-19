@@ -1,0 +1,8 @@
+<table id="report_result">
+  <% if report.accept? %>
+    <tr><td id="defects_not_found">Acceptable to specification.</td></tr>
+  <% end -%>
+  <% if report.reject? %>
+    <tr><td id="not_acceptable">Not acceptable to specification.</td></tr>
+  <% end -%>
+</div>

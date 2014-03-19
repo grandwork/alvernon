@@ -1,0 +1,75 @@
+$('body').append('<%= j render "emails_editor" %>');
+
+$("#emails_editor").foundation('reveal', 'open');
+
+$('#emails_editor_close').click(function(evt) {
+  $('#emails_editor').foundation('reveal', 'close');
+  $('#emails_editor').remove();
+});
+
+window.new_emails = [];
+
+$('#emails_editor button.close').click(function(evt) {
+  $('#emails_editor').modal('hide');
+  $('#emails_editor').remove();
+});
+
+$('#emails_editor_emails').chosen({
+  create_option: function(term) {
+    if (term.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i)) {
+      this.append_option({
+        value: term,
+        text: term
+      });
+      window.new_emails.push(term);
+      $('#emails_editor_submit').removeClass('disabled');
+    } else {
+      alert('You must provide a valid email.');
+    }
+  },
+  create_option_text: 'Add another email:'
+});
+
+$('#emails_editor_emails').chosen().change(function() {
+  if ($('#emails_editor_emails').chosen().val() != null ) {
+    $('#emails_editor_submit').removeClass('disabled');
+  } else {
+    $('#emails_editor_submit').addClass('disabled');
+  }
+});
+
+$('#emails_editor_submit').click(function(evt) {
+  evt.preventDefault();
+  if ($(this).hasClass('disabled')) {
+    return;
+  };
+  var report_ids = [];
+  $('.editor_remove_report').each(function(elem) {
+    report_ids.push($(this).attr('data-report'));
+  });
+  $('#emails_editor_submit').html('<img src="/assets/ajax-loader.gif"> Sending...');
+  $('#emails_editor_submit').addClass('disabled');
+  clients = [];
+  $('optgroup').each(function(item) {
+    clients.push($(this).attr('label'));
+  });
+  console.log(clients);
+  $.post('/send_multiple_via_email', {
+    emails: $('#emails_editor_emails').chosen().val().join(),
+    reports: report_ids.join(),
+    text: $('#emails_editor_textarea').val(),
+    copy: $('#cc').is(':checked'),
+    new_emails: window.new_emails,
+    clients: clients
+  });
+});
+
+$("span.label:contains('MT')").addClass("label-mt");
+$("span.label:contains('UT')").addClass("label-ut");
+$("span.label:contains('RT')").addClass("label-rt");
+$("span.label:contains('ET')").addClass("label-et");
+$("span.label:contains('PT')").addClass("label-important");
+$("span.label:contains('VT')").addClass("label-vt");
+$("span.label:contains('DT')").addClass("label-dt");
+$('i,span[rel=tooltip]').tooltip();
+$('#emails_editor').modal('show');

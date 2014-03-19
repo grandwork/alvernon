@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <!-- Uncomment to make IE8 render like IE7 -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+    <!-- <title>Canyon State Inspection - Reporting System</title> -->
+    <%= stylesheet_link_tag    "application" %>
+    <%= csrf_meta_tags %>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+  </head>
+<body class="grey">
+
+<div class="fixed">
+<nav class="top-bar">
+  <ul class="title-area">
+    <!-- Title Area -->
+    <li class="name">
+      <h1><%= link_to "CSI", "/" %></h1>
+    </li>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li class="divider"></li>
+      <% unless current_user.client %>
+      <li class="has-dropdown not-click"><a href="#">Create New Report</a>
+        <ul class="dropdown">
+          <li class="divider"></li>
+          <li><%= link_to "Visual (VT)", new_reports_visual_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Liquid Penetrant (PT)", new_reports_pt_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Magnetic Particle (MT)", new_reports_mpi_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Ultrasonic (UT)", new_reports_ultrasonic_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Thickness (TR)", new_reports_ultrasonic_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Radiography (RT)", new_reports_radiographic_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Welder Qualifications", "/" %></li>
+        </ul>
+       </li> 
+      <% end -%>
+      <li class="divider"></li>
+      <li id="quals"><%= link_to "My Qualifications", qualifications_path %></li>
+      <li class="divider"></li>
+      <li id="updates"><%= link_to "Recent Updates", "/updates" %></li>
+      <% if current_user.admin? %>
+        <li class="divider"></li>
+        <li id="clients"><%= link_to "Manage Client Companies", clients_path %></li>
+        <li class="divider"></li>
+        <li id="users"><%= link_to "Manage Users", admin_technicians_path %></li>
+      <% end %>
+      <li class="divider"></li>
+      <li class="has-form">
+        <%= form_tag("/search", :method => "get", :class => "navbar-search") do %>
+          <div class="row collapse">
+            <div class="small-8 columns">
+              <%= text_field_tag(:q, @q ||= "", :placeholder => "Search...", :class => "search-query span4") %>
+            </div>
+            <div class="small-4 columns">
+              <%= submit_tag("Search", :id => "search_submit_button", :class => "button secondary") %>
+            </div>
+          </div>  
+        <% end %>
+        <!-- <form>
+          <div class="row collapse">
+            <div class="small-8 columns">
+              <input type="text">
+            </div>
+            <div class="small-4 columns">
+              <a href="#" class="button success">Search</a>
+            </div>
+          </div> -->
+      </li>
+    </ul>
+
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="divider hide-for-small"></li>
+      <% unless current_user.client %>
+        <li class="has-dropdown not-click">
+          <a href="#">
+            <i class="fa fa-user"></i> <%= current_user.email %>
+          </a>
+          <ul class="dropdown">
+            <li class="divider"></li>
+            <li><%= link_to '<i class="fa fa-pencil-square-o"></i> Signature'.html_safe, :account %></li>
+            <li class="divider"></li>
+            <li><%= link_to '<i class="fa fa-key fa-fw"></i> Change Password'.html_safe, edit_users_update_password_path %></li>
+            <li class="divider"></li>
+            <li><%= link_to('<i class="fa fa-power-off"></i> Sign-Out'.html_safe, destroy_user_session_path, :method => :delete) %></li>
+          </ul>
+        </li> 
+      <% end -%>
+      <% if current_user.client %>
+        <li><%= link_to('Sign-Out', destroy_user_session_path, :method => :delete) %></li>
+      <% end -%>
+    </ul>
+
+  </section>
+</nav>
+</div>
+<div class="row">
+  <div id="flash_container">
+    <%= render :partial => 'shared/flash_messages' %>
+  </div> 
+</div>
+
+<div class="row max-width">
+
+  <div class="large-10 columns">
+    <%= yield %>  
+  </div>
+
+  <!-- sidebar -->
+  <div class="large-2 columns">
+    <%= render partial: 'emails/emails_cart' %>
+    <%= render 'shared/statistics' %>
+  </div>
+
+  
+
+</div><!-- END .row -->
+
+<footer></footer>
+<%= javascript_include_tag "application" %>
+</body>
+</html>

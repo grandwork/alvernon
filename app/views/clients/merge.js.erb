@@ -1,0 +1,6 @@
+$('#modal_header').text('Merging <%= @source.title %> with <%= @target.title %>');
+$('#modal_submit').text('Continue');
+$('#modal_body').html('<%= escape_javascript(render("merge_warning")) %>');
+$('#modal_submit').attr('href', "/merge_client/<%= @source.id %>/with/<%= @target.id %>");
+$('#modal_close').text('Cancel');
+$('#modal').modal('show');

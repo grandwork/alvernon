@@ -1,0 +1,38 @@
+<div id="emails_editor" class="reveal-modal" data-reveal>
+  <h3>Review Reports to be emailed</h3>
+  <%= render 'emails/reports', reports: @reports %>
+  <hr />
+  <h4>Send to:</h4>
+  <select data-placeholder="Enter email" multiple id="emails_editor_emails" style="width: 500px;">
+    <% @emails.each_key do |client| %>
+      <optgroup label="<%= client.name %>">
+        <% @emails[client].each do |email| %>
+          <option value="<%= email %>"><%= email %></option>
+        <% end -%>
+      </optgroup>
+    <% end -%>
+  </select>
+  <label class="checkbox">
+    <input type="checkbox" id="cc"> Send me a copy
+  </label>
+  <h4>Message:</h4>
+  <textarea id="emails_editor_textarea">
+    Dear Customer,
+    The <%= @reports.length > 1 ? 'reports' : 'report' %> <%= @reports.map { |r| "##{r.specific.uid}" }.join(', ') %> from Canyon State Inspection <%= @reports.length > 1 ? 'are' : 'is'  %> complete. 
+    You can find <%= @reports.length > 1 ? 'them' : 'it' %> in the attached PDF <%= @reports.length > 1 ? 'files' : 'file' %>.
+
+    Please reply to this e-mail address: <%= current_user.email %>
+    Please do not reply to this message via e-mail. 
+    This address is automated, unattended and cannot help with questions or requests.
+
+    Best Regards,
+    <%= current_user.full_name %>
+    <%= current_user.email %>
+    Canyon State Inspection
+  </textarea>        
+  <a href="#" class="button small success radius" id="emails_editor_submit">Email</a>
+  <a href="#" class="button tiny alert radius" id="emails_editor_close" data-dismiss="modal">Close</a>
+</div>
+
+
+

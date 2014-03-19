@@ -1,0 +1,8 @@
+<%= image_tag @image.image_url(:large), id: "editable_image" %>
+
+<%= form_for @image, id: "coords_form" do |f| %>
+  <% %w{x y w h}.each do |attribute| %>
+    <%= f.hidden_field "crop_#{attribute}" %>
+  <% end -%>
+  <%= hidden_field_tag "element", params[:element] %>
+<% end -%>

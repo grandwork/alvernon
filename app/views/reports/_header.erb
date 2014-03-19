@@ -1,0 +1,12 @@
+<% object ||= @object %>
+<div id="report_header" class="report">
+  <div id="brand_meta">
+    <%= image_tag "report_logo.png" %>
+  </div><!-- end #brand_meta -->
+  <div class="bar">
+    <h1>
+    	<%= object.title %> <%= "Inspection Report".upcase %>
+    	<%= object.uid %>
+    </h1>
+  </div>
+</div><!-- end #report_show_header -->

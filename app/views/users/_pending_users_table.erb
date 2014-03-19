@@ -1,0 +1,24 @@
+<%= paginate @pending %>
+<div class="main_content">
+  <table>
+    <tbody>
+      <thead>
+      <tr>
+        <th>Name & Email</th>
+        <th>Invitation Sent</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    	<% @pending.each do |u| %>
+    		<tr>
+    			<td><%= u.full_name %> (<%= mail_to u.email %>)</td>
+    			<td><%= distance_of_time_in_words_to_now(u.invitation_sent_at) %> ago.</td>
+    			<td><%= link_to "Resend invitation", "/users/resend_invitation/#{u.id}", :class => "button secondary tiny radius" %>
+    			<%= link_to "Cancel invitation", "/users/cancel_invitation/#{u.id}", :confirm => "Are you sure?", :class => "button alert radius tiny" %></td>
+    		</tr>
+    	<% end %>
+    	</tbody>
+    </table>
+</div>
+
+<%= paginate @pending %>

@@ -1,0 +1,43 @@
+<%= render :partial => "reports/report_view", :locals => { :report => et.report }  %>
+
+<table id="et_specific" class="report">
+  
+  <tbody>
+    <tr>
+      <td id="col1" class="shaded">Equipment</td>
+      <td id="col2"><%= et.equipment %></td>
+      <td id="col3" class="shaded">Serial Number</td>
+      <td id="col4"><%= et.serial %></td>
+      <td id="col5" class="shaded">Cal Due Date</td>
+      <td id="col6"><%= et.calibration_due.strftime("%d-%m-%Y") if et.calibration_due %></td>
+
+      
+    </tr>
+    <tr>
+      <td class="shaded">Coating thick.</td>
+     	<td><%= et.coating %></td>
+      <td class="shaded">Cal Block</td>
+     	<td><%= et.calibration_block %></td>
+    </tr>
+  </tbody>
+</table>
+
+<table id="probes_table" class="report">
+	<% if et.et_probes.any? %>
+		<%= render :partial => "reports/ets/probes_rows.html.erb", :locals => {:et => et}  %>
+	<% end %>
+</table>
+
+<div id="report_description">
+	<%= et.report.description.html_safe %>
+</div>
+
+<%= render :partial => "reports/accept_reject", :locals => { :report => et.report } %>
+
+
+
+<table id="defects_table" class="report">
+  <% if et.et_defects.any? %>
+    <%= render :partial => "reports/ets/defects_rows.html.erb", :locals => {:et => et}  %>
+  <% end %>
+</table>

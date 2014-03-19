@@ -1,0 +1,6 @@
+$('.email_btn').removeClass('active');
+$('.email_btn').removeClass('remove_email_report');
+$('.email_btn').addClass('add_email_report');
+$('<%= ".email_report_#{params[:id]}" %>').prop('checked', false);
+$('#emails_cart').html('<%= j render "emails_cart" %>');
+$('#emails_cart .alert').effect('highlight', {}, 3000);

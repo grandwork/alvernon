@@ -1,0 +1,15 @@
+<p>Dear Customer,</p>
+
+<p>
+  The <%= @report.specific_type.upcase %> report #<%= @report.specific.uid %> from
+  Canyon State Inpection is complete. You can find it in the attached PDF file. 
+</p>
+
+<p>
+  Please reply to this email <%= @sender.email %>
+</p>  
+
+<p>Best Regards,<br/>
+<%= @sender.full_name %><br/>
+<%= @sender.email %><br/>
+Canyon State Inpection </p>

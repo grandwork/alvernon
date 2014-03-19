@@ -1,0 +1,75 @@
+<%= form_for [:reports, @ut], :html => { :class => "form-horizontal report-form", data: { checkclient: 'true'} } do |f| %>
+  
+	<% errors_as_alerts(@ut) %>
+
+	<%= render :partial => "reports/report_form", :locals => { :f => f }  %>
+
+  <div class="row-fluid">
+    <fieldset class="generic">
+      <legend>Ultrasonic Specific</legend>
+        <div class="span6">
+          
+
+            <%= f.label :equipment, :class => "alt_label" %>
+            <%= f.text_field :equipment, :class => "input-large", 'data-autocomplete' => 'ultrasonic' %>
+            <span class="help-block">Equipment manufacturer, model and serial number</span>
+
+            <%= f.label :calibration_date, "Cal Due Date", :class => "alt_label" %>
+            <%= f.text_field :calibration_date, :class => "input-large date_input" %>
+            <span class="help-block">Equipment calibration expiration date.</span>
+          
+            <%= f.label :sensitivity, :class => "alt_label" %>
+            <%= f.text_field :sensitivity, :class => "input-large", 'data-autocomplete' => 'ultrasonic' %>
+            <span class="help-block">eg. ASME 3mm SDH to 80%FSH or 2nd BWE to 80%FSH.</span>
+  
+            <%= f.label :couplant, :class => "alt_label" %>
+            <%= f.text_field :couplant, :class => "input-large", 'data-autocomplete' => 'ultrasonic' %>          
+
+
+            <%= f.label :correction, "Transfer Correction", :class => "alt_label" %>
+            <%= f.text_field :correction, :class => "input-large" %>
+            <span class="help-block">dB difference between cal block and test piece.</span>
+
+            <%= f.label :cable, :class => "alt_label" %>
+            <%= f.text_field :cable, :class => "input-large" %>
+            <span class="help-block">The cable type and length.</span>
+
+            <%= f.label :cal_block, :class => "alt_label" %>
+            <%= f.text_field :cal_block, :class => "input-large" %>
+            <span class="help-block">The calibration block serial number or ID.</span>
+          
+          <table>
+            <tfoot>
+              <tr>
+                <td colspan="6"><%= link_to_new_ut_probe_fields f.object, f %></td>
+              </tr>
+            </tfoot>
+            <%= f.fields_for :ut_probes do |probes_table| %>
+              <%= render partial: 'probes_edit_table', locals: { f: probes_table } %>
+            <% end -%>
+          </table>
+            
+      </div>   
+    </fieldset>    
+  </div>
+  
+
+  <fieldset class="generic">
+    <legend>Defects</legend>
+      <div class="span9">
+        <table>
+          <tfoot>
+            <tr><td colspan="9"><%= link_to_new_ut_defect_fields f.object, f %></td></tr>
+          </tfoot>
+          <%= f.fields_for :ut_defects do |defects_form| %>
+            <%= render :partial => 'defects_edit_table', :locals => { :f  => defects_form }  %>
+            <% end %> 
+        </table>                                
+  </fieldset>
+  
+	<div class="input"> <!-- this is duplicated across all reports -->
+	  <%= f.submit :class => "btn btn-success btn-large" %> or
+	  <%= link_to '<i class="icon-remove icon-white"></i> Cancel'.html_safe, :root, :class => "btn btn-small btn-danger" %>
+	</div>
+	
+<% end %>

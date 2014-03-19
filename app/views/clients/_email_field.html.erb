@@ -1,0 +1,5 @@
+<div class="row-fluid">
+	<%= label_tag "", "Email", class: "alt_label" %>
+	<%= email_field_tag "client[emails][]", email, class: 'input-xlarge' %>
+	<%= link_to '<i class="icon-trash icon-white"></i> Remove Email'.html_safe, '#', :onclick => "remove_email(this);", :remote => true, :class => "btn btn-danger btn-small" %>
+</div>

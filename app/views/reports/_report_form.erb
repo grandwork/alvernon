@@ -1,0 +1,93 @@
+<% user ||= @user %> 
+<% @report = get_generic_report %>
+<%= f.fields_for :report do |report_form| %>
+
+<div class="row">
+  <div class="large-6 columns">
+  
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Title</label>
+      <%= report_form.text_field :title, :placeholder => "Give the inspection a descriptive title" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Client</label>
+      <%= report_form.collection_select(:client, Client.all, :name, :name, {:include_blank => 'Select Client', 'data-clients' => 'report'}, {:class => ''}) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Job</label>
+      <%= report_form.text_field :job_number, :placeholder => "The Canyon State job reference number eg. GT13-0001" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-4 columns">
+      <label>Date</label>
+      <%= report_form.text_field :date, :class => "date_input", :value => l(report_form.object.date) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Location</label>
+      <%= report_form.text_field :location, :placeholder => "Where was the inspection carried out", 'data-autocomplete' => 'report' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Procedure</label>
+      <%= report_form.text_field :procedure, :placeholder => "The CSI procedure", 'data-autocomplete' => 'report' %>
+      <%# render :partial => "shared/procedure_modal" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Code</label>
+      <%= report_form.text_field :code, :placeholder => "The acceptance spec used", 'data-autocomplete' => 'report' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Description</label>
+      <%= report_form.text_area :description, class: 'tinymce', rows: '20' %>    
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Result</label>
+      <%= report_form.select :result, Report.results_array %> 
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Qualification</label>
+      <!-- if admin is editing another users report hide this -->
+        <% if @report.new_record? || @report.user == current_user %>
+          <%= report_form.select :qualification_id, current_user.qualifications_array, {:prompt => 'Select your qualification for this report...'} %>
+          <% else -%>
+            <% if @report.qualification %> 
+              <%= @report.qualification.name %>
+            <% else %>
+              the user has not selected a qualification
+            <% end -%>  
+          <% end -%> 
+    </div>
+  </div>
+
+  </div>
+</div>
+<% end %>
+
+<%= render 'shared/generic_modal' %>

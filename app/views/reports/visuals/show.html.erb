@@ -1,0 +1,12 @@
+<% visual ||= @specific %>
+
+<%= render 'reports/menu', specific: visual %>
+
+<div id="report_show" class="report">
+	<%= render "header", :visual => visual  %>
+  
+  <%= render "body", :visual => visual %>
+
+  <%= render 'footer', :user => visual.report.user, :report => visual.report %>
+
+</div><!-- END #report_show -->

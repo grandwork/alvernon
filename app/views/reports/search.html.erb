@@ -1,0 +1,102 @@
+<div class="main_content">
+  <div class="page_header">
+    <h1><%= header_for_search_query(@results, @field, @q) %></h1>
+  </div>
+  <div class="table_container">
+    <table>
+      <thead>
+        <tr class="row_border">
+          <td class="report_num_col">Report #</td>
+          <td></td>
+          <td></td>
+          <td>Project Title</td>
+          <% if current_user.client %>
+            <td>Part Desc.</td>
+          <% end %>  
+          <td>Part</td>
+          <td>Drawing #</td>
+          <% unless current_user.client %>
+            <td>Client</td>
+          <% end %>  
+          <td>Client Order #</td>
+          <td>Technician</td>
+          <td>Updated</td>
+          <% unless current_user.client %>
+            <td><i class="icon-envelope" rel="tooltip" title="Marked to be emailed"></i></td>
+          <% end -%>
+        </tr>
+      </thead>
+      <tbody>
+    	<% @results.each do |report| %>
+    		<tr>
+    		  <td class="report_number"> <!-- can we template this out to remove the duplication? -->
+    		    <span class="label"><%= report.uid %></span>
+    		  </td>
+          <td>
+            <% if report.last_time_mailed %>
+              <i class="icon-envelope" rel="tooltip" title="<%= text_for_mailing(report.last_time_mailed) %>"></i>
+            <% end -%>
+          </td>
+          <td>
+            <% if report.specific.class.name == "Destructive" %>
+              <% if report.specific.approved_at != nil %>
+               <span class="label label-accept" rel="tooltip" title="Approved <%= distance_of_time_in_words_to_now(report.specific.approved_at) %> ago by <%= User.find(report.specific.approved_by).full_name %>">AP</span>
+              <% else -%>
+              <span class="label label-reject" rel="tooltip" title="Not Arroved Yet">AP</span>
+              <% end %>
+            <% else %>
+              <% if report.reject? %>
+                <span class="label label-reject" rel="tooltip" title="Reject">R</span>
+              <% end -%>
+              <% if report.accept? %>
+                <span class="label label-accept" rel="tooltip" title="Accept">A</span>
+              <% end -%>
+            <% end -%>
+          </td>
+    		  <td><%= link_to truncate(report.title, :length => 27), [:reports, report.specific] %></td>
+    		  <% if current_user.client %>
+    		    <% if report.specific.class.name == "Destructive" %>
+              <td><%= truncate(report.specific.part_description, :length => 23) %></td>
+            <% else %>
+              <td><%= truncate(report.part_description, :length => 23) %></td>
+            <% end -%>
+    		  <% end %>  
+
+    		  <% if report.specific.class.name == "Destructive" %>
+            <td><%= truncate(report.specific.part_name, :length => 23) %></td>
+          <% else %>
+            <td><%= truncate(report.part_number, :length => 23) %></td>
+          <% end %>
+
+    		  <% if report.specific.class.name == "Destructive" %>
+            <td><%= truncate(report.specific.drawing_number, :length => 23) %></td>
+          <% else %>
+            <td><%= truncate(report.drawing_number, :length => 23) %></td>
+          <% end %> 
+
+    		  <% unless current_user.client %>
+    		    <td><%= client_link_to truncate(report.client, :length => 27), "/reports/client?q=#{u report.client}" %></td>
+    		  <% end %>
+    		  <td><%= link_to truncate(report.work_order_number, :length => 19), "/reports/work_order?q=#{u report.work_order_number}" %></td>
+          <td><%= client_link_to truncate(report.user.full_name, :length => 19), "/reports/user?q=#{report.user.id}" %></td>
+    		  <% if report.updated_at > 24.hours.ago %>
+          <td><small><%= time_ago_in_words(report.updated_at) %> ago</small></td>
+        <% else %>
+          <td><small><%= report.updated_at.strftime("%d-%b-%y") %></small></td>
+        <% end -%>
+          <% unless current_user.client %>
+            <td>
+              <% unless (report.specific.class.name == "Destructive" && report.specific.approved_at.nil?) %>
+                <%= check_box_tag "email_report_#{report.id}", report.id, @emails_cart.has?(report.id), class: "email_checkbox email_report_#{report.id}" %>
+              <% end -%>
+            </td>
+          <% end -%>
+    		</tr>
+    	<% end %> 
+    </tbody>
+    </table>
+  </div>
+</div>
+<div class="pagination">
+    <%= paginate @results %>
+</div>  

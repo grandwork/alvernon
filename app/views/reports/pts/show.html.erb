@@ -1,0 +1,12 @@
+<% pt ||= @specific %>
+
+<%= render 'reports/menu', specific: pt %>
+
+<div id="report_show" class="report">
+	<%= render "header", :pt => pt  %>
+  
+  <%= render "body", :pt => pt %>
+
+  <%= render 'footer', :user => pt.report.user, :report => pt.report %>
+
+</div><!-- END #report_show -->

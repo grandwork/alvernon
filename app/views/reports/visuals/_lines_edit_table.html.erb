@@ -1,0 +1,25 @@
+<tr class="<%= cycle("odd", "even", :name => "row_class") %> fields">
+	<td>
+    <%= f.text_field :area, :placeholder => "Area" %>
+    <%= f.text_field :quantity, :placeholder => "Quantity" %>   
+  	<%= f.text_field :level, :placeholder => "Level" %>
+  	<%# f.text_field :result, :placeholder => "Result" %>
+    <label>Select Result</label>
+    <%= f.select :result, VisualLine.results_array, :include_blank => true %> 
+  	
+		<div class="row">
+			<div class="large-6 columns">
+      
+      <%= f.text_field :defect, :placeholder => "Defects" %>
+
+      </div>	
+    </div>
+
+    <%= f.text_field :comments, :placeholder => "Short comments" %>
+
+  <%= f.hidden_field :_destroy %>
+	<%= link_to '<i class="fa fa-trash-o"></i> Remove this line item'.html_safe, nil, :onclick => "remove_fields(this);", :remote => true, :class => "button tiny alert radius" %>
+
+  </td>
+	
+</tr>

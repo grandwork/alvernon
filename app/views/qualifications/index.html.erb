@@ -1,0 +1,27 @@
+<div class="main_content">
+
+  	<table class="table table-bordered">
+  	<thead>
+  	  <tr>
+  	    <th>Name</th>
+  	    <th>Level</th>
+  	    <th>Number</th>
+  	    <th>Actions</th>
+  	  </tr>
+  	</thead>
+	
+  	<tbody>
+		<% @qualifications.each do |qualification| %>
+			<tr>
+				<td><%= qualification.name %></td>
+				<td><%= qualification.level %></td>
+				<td><%= qualification.number %></td>
+				<td><%= link_to 'Edit', edit_qualification_path(qualification), :class => "button tiny" %>
+				<%= link_to 'Delete', qualification, method: :delete, data: { confirm: 'Are you sure?' }, :class => '	button tiny alert' %></td>
+			</tr>
+		<% end -%>	
+		</tbody>
+	</table>
+	<%= link_to '<i class="fa fa-plus"></i> Add Qualification'.html_safe, '/qualifications/new', :class => 'button small radius success' %>
+
+</div>

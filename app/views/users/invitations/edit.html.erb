@@ -1,0 +1,45 @@
+<%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
+  <%= devise_error_messages! %>
+  <%= render :partial => 'shared/flash_messages' %>
+
+  <%= f.hidden_field :invitation_token %>
+
+  <fieldset>
+    <legend>Set your password</legend>
+
+    <div class="row collapse">
+      <div class="small-3 large-2 columns">
+        <span class="prefix"><i class="fa fa-envelope-o fa-fw"></i></span>
+      </div>
+      <div class="small-9 large-10 columns">
+        <%= f.email_field :email, placeholder: "Email address" %>
+      </div>
+    </div>
+
+    <div class="row collapse">
+      <div class="small-3 large-2 columns">
+        <span class="prefix"><i class="fa fa-key fa-fw"></i></span>
+      </div>
+      <div class="small-9 large-10 columns">
+        <%= f.password_field :password, :placeholder => "Choose a password and enter it here" %>
+      </div>
+    </div>
+
+    <div class="row collapse">
+      <div class="small-3 large-2 columns">
+        <span class="prefix"><i class="fa fa-key fa-fw"></i></span>
+      </div>
+      <div class="small-9 large-10 columns">
+        <%= f.password_field :password_confirmation, :placeholder => "Re-enter your password to confirm" %>
+      </div>
+    </div>
+
+    <div class="row collapse">
+      <div class="small-3 large-2 columns">
+  			<%= f.submit "Set my password", :class => "button small success radius" %>      
+      </div>
+    </div>
+  
+  
+  
+<% end %>

@@ -1,0 +1,10 @@
+<p>Dear Customer,</p>
+
+<p>You can view your reports by following this link: <%= @link.nil? ? "<unique access link>" : @link %></p>
+
+<p>Please reply to this email <%= @sender.email %></p>
+
+<p>Best regards,<br/>
+<%= @sender.full_name %><br/>
+<%= @sender.email %><br/>
+Canyon State Inpection</p>

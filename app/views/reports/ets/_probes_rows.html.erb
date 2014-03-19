@@ -1,0 +1,26 @@
+<thead>
+	<tr>
+		<td class="shaded" colspan="7">Eddy Current Probes</td>
+	</tr>
+	<tr>
+		<td class="shaded">Frequency</td>
+		<td class="shaded">Type</td>
+		<td class="shaded">Mode</td>
+		<td class="shaded">Serial</td>
+		<td class="shaded">Gain</td>
+		<td class="shaded">Phase</td>
+		<td class="shaded">Sensitivity</td>
+	</tr>
+</thead>
+<% et.et_probes.each do |probe| %>
+	<tr class="<%= cycle("odd", "even", :name => "row_class") %> fields">
+		<td><%= probe.frequency %></td>
+		<td><%= probe.probe_type %></td>
+		<td><%= probe.mode %></td>
+		<td><%= probe.serial %></td>
+		<td><%= probe.gain %></td>
+		<td><%= probe.phase %></td>
+		<td><%= probe.sensitivity %></td>
+		
+	</tr>
+<% end %>

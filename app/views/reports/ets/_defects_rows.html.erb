@@ -1,0 +1,18 @@
+<thead>
+	<tr>
+		<td class="shaded">Scope</td>
+		<td class="shaded">Start</td>
+		<td class="shaded">Length</td>
+		<td class="shaded">Type</td>
+		<td class="shaded">Result</td>
+	</tr>
+</thead>
+<% et.et_defects.each do |defect| %>
+	<tr class="<%= cycle("odd", "even", :name => "row_class") %> fields">
+		<td><%= defect.scope %></td>
+		<td><%= defect.start %></td>
+		<td><%= defect.length %></td>
+		<td><%= defect.defect_type %></td>
+		<td class="<%= accept_or_reject_class(defect) %>"><%= defect.result %></td>
+	</tr>
+<% end %>

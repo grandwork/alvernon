@@ -1,0 +1,50 @@
+
+<% @rt.rt_defects.each do |defect| %>
+  <div class="dotted_border">
+	<table class="table-flash">
+		<tr>
+		  <td colspan="1" class="shaded">Client:</td>
+			<td colspan="3" class="shaded"><%= @rt.report.client %></td>
+		</tr>
+		<tr>
+		  <td colspan="1" class="shaded">Part Number:</td>		  
+		  <td colspan="3" class="shaded"><%= @rt.report.part_number %></td>
+		</tr>  
+		<tr>
+		  <td colspan="1" class="shaded">Work Order #:</td>
+			<td colspan="3" class="shaded"><%= @rt.report.work_order_number %></td>
+		</tr>  
+		<tr>
+			<td colspan="1" class="shaded">Drawing #:</td>
+			<td colspan="3" class="shaded"><%= @rt.report.drawing_number %></td>
+		</tr>
+		<tr>
+			<td class="shaded">Report #:</td>
+			<td class="shaded"><%= @rt.uid %></td>
+			<td class="shaded">Date:</td>
+			<td class="shaded"><%= @rt.report.date_of_inspection.strftime("%d-%m-%Y") %>
+		</tr>
+		<tr>
+			<td class="shaded">Weld #:</td>
+			<td class="shaded"><%= defect.part_number %>
+			
+			<td class="shaded">Welder:</td>
+			<td class="shaded"><%= defect.welder %></td>
+		</tr>
+		<tr class="comments">
+			<td colspan="4">Comments:</td>
+		</tr>
+		<tr>
+			<td class="accept_reject">
+				<input type="checkbox" name="option1" value="Accept"> Accept<br>
+				<input type="checkbox" name="option1" value="Reject"> Reject
+			</td>
+			<td colspan="3" class="signature">
+			
+			</td>
+		</tr>
+	</table>
+	</div>
+<% end -%>
+
+

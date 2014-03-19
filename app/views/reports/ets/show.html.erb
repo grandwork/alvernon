@@ -1,0 +1,12 @@
+<% et ||= @specific %>
+
+<%= render "reports/menu", specific: et %>
+
+<div id="report_show" class="report">
+	<%= render "header", :et => et  %>
+  
+  <%= render "body", :et => et %>
+
+  <%= render 'footer', :user => et.report.user, :report => et.report %>
+
+</div><!-- END #report_show -->

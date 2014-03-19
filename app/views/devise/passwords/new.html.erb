@@ -1,0 +1,21 @@
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+<%= devise_error_messages! %>
+<%= render :partial => 'shared/flash_messages' %>
+  <fieldset>
+    <legend>Forgotten Password</legend>
+
+    <div class="row collapse">
+      <div class="small-3 large-2 columns">
+        <span class="prefix"><i class="fa fa-envelope-o fa-fw"></i></span>
+      </div>
+      <div class="small-9 large-10 columns">
+        <%= f.email_field :email, :placeholder => "Enter your email and we'll send reset instructions" %>
+      </div>
+    </div>
+    <%= f.submit "Send me reset instructions", :class => "button small success radius" %>
+  
+    <div class="extras">
+      <%= render :partial => "devise/shared/links" %>
+    </div>
+  </fieldset>
+<% end %>

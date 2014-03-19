@@ -1,0 +1,71 @@
+
+  <table class="dashboard_list">
+      <thead>
+        <tr class="">
+          <th width="70" class="report_num_col">Report #</th>
+          <th></th>
+          <th></th>
+          <th width="250">Project Title</th>
+          <% if current_user.client %>
+            <th>Part Desc.</th>
+          <% end %>  
+          <th width="200">Job #</th>
+          <% unless current_user.client %>
+            <th width="200">Client</th>
+          <% end %>  
+          
+          <th width="200">Technician</th>
+          <th>Updated</th>
+          <% unless current_user.client %>
+            <th><i class="icon-envelope" rel="tooltip" title="Marked to be emailed"></i></th>
+          <% end -%>
+        </tr>
+      </thead>
+      <tbody>
+  	<% reports.each do |report| %>
+  		<tr>
+  		  <td class="report_number">
+  		    <span class="label radius"><%= report.uid %></span>
+  		  </td>
+        <td>
+          <%# if report.last_time_mailed %>
+            <!-- <i class="icon-envelope" rel="tooltip" title="<%# text_for_mailing(report.last_time_mailed) %>"></i> -->
+          <%# end -%>
+        </td>
+        <td>
+          <% if report.reject? %>
+            <span class="label radius" rel="tooltip" title="Reject">R</span>
+          <% end -%>
+          <% if report.accept? %>
+            <span class="label radius success" rel="tooltip" title="Accept">A</span>
+          <% end -%>
+        </td>
+  		  <td><%= link_to truncate(report.title, :length => 27), [:reports, report.specific] %></td>
+        <td><%= link_to truncate(report.job_number, :length => 19), "/reports/job_number?q=#{u report.job_number}" %></td>
+        <%# link_to truncate(report.work_order_number, :length => 19), "/reports/work_order?q=#{u report.work_order_number}" %>
+
+  		  <!-- <%# if current_user.client %>
+  		    <td><%# truncate(report.part_description, :length => 23) %></td> -->
+        <%# end -%>
+  		  <!-- <td><%# truncate(report.part_number, :length => 23) %></td>
+  		  <td><%# truncate(report.drawing_number, :length => 23) %></td> -->
+  		  <% unless current_user.client %>
+  		    <td><%= client_link_to truncate(report.client, :length => 27), "/reports/client?q=#{u report.client}" %></td>
+  		  <% end %>
+		    
+        <td><%= client_link_to truncate(report.user.full_name, :length => 19), "/reports/user?q=#{report.user.id}" %></td>
+  		  <% if report.updated_at > 24.hours.ago %>
+          <td><small><%= time_ago_in_words(report.updated_at) %> ago</small></td>
+        <% else %>
+          <td><small><%= report.updated_at.strftime("%d-%b-%y") %></small></td>
+        <% end -%>
+        <% unless current_user.client %>
+          <td>
+            <%= check_box_tag "email_report_#{report.id}", report.id, @emails_cart.has?(report.id), class: "email_checkbox email_report_#{report.id}" %>
+          </td>
+        <% end -%>
+  		</tr>
+  	<% end %> 
+  </tbody>
+  </table>
+ 

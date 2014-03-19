@@ -1,0 +1,5 @@
+<%= form_for EditableImage.new do |f| %>
+  <%= f.label :image, "Choose Image" %>
+  <%= f.file_field :image %>
+  <%= hidden_field_tag :element, params[:element] %>
+<% end -%>

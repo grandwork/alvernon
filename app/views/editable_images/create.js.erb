@@ -1,0 +1,34 @@
+$('#modal_body').html('<%= j render "show" %>');
+$('#editable_image').Jcrop({
+  setSelect: [0, 0, 530, 530],
+  onChange: function(coords) {
+    $('#editable_image_crop_x').val(coords.x);
+    $('#editable_image_crop_y').val(coords.y);
+    $('#editable_image_crop_w').val(coords.w);
+    $('#editable_image_crop_h').val(coords.h);
+  },
+  onSelect: function(coords) {
+    $('#editable_image_crop_x').val(coords.x);
+    $('#editable_image_crop_y').val(coords.y);
+    $('#editable_image_crop_w').val(coords.w);
+    $('#editable_image_crop_h').val(coords.h);
+  }
+});
+$('#modal_submit').unbind('click');
+$('#modal_submit').text('Upload');
+$('#modal_submit').click(function(evt) {
+  var x = $('#editable_image_crop_x').val();
+  var y = $('#editable_image_crop_y').val();
+  var h = $('#editable_image_crop_h').val();
+  var w = $('#editable_image_crop_w').val();
+  var element = $('#element').val();
+  var data_string = '_method=put&editable_image[crop_x]=' + x + '&editable_image[crop_y]=' + y + '&editable_image[crop_w]=' + w + '&editable_image[crop_h]=' + h + '&element=' + element;
+  $.ajax({
+    type: "PUT",
+    url: $('.edit_editable_image').first().attr('action'),
+    data: data_string,
+    dataType: "script"
+  });
+  evt.preventDefault();
+});
+$('#modal_submit').show();

@@ -1,0 +1,43 @@
+<%= form_for(@user, :as => @user, :url => users_update_password_path, :html => { :method => :put }) do |f| %>  
+	<%= errors_as_alerts(@user) %>
+	<%= render :partial => 'shared/flash_messages' %>
+	<fieldset>
+    <legend>Change Password</legend>
+
+    <div class="row collapse">
+      <div class="small-3 large-2 columns">
+        <span class="prefix"><i class="fa fa-key fa-fw"></i></span>
+      </div>
+      <div class="small-9 large-10 columns">
+        <%= f.password_field :password, :placeholder => "Enter your current password" %>
+      </div>
+    </div>
+
+    <div class="row collapse">
+      <div class="small-3 large-2 columns">
+        <span class="prefix"><i class="fa fa-key fa-fw"></i></span>
+      </div>
+      <div class="small-9 large-10 columns">
+        <%= f.password_field :password, :placeholder => "Enter your new password" %>
+      </div>
+    </div>
+
+     <div class="row collapse">
+      <div class="small-3 large-2 columns">
+        <span class="prefix"><i class="fa fa-key fa-fw"></i></span>
+      </div>
+      <div class="small-9 large-10 columns">
+        <%= f.password_field :password_confirmation, :placeholder => "Enter your new password" %>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.submit "Set my password", :class => "button small success radius" %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>
+
+<%= link_to "Nevermind, take me back", account_path, :class => "button tiny secondary radius" %>

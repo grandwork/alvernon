@@ -1,0 +1,9 @@
+<% if @source.reports.any? %>
+	<p>This will set <%= @target.title %> as client for the following reports:</p>
+	<%= render 'reports/simple_report_list', reports: @source.reports %>
+<% end -%>
+<% if @source.emails.any? %>
+	<p>Email addresses for <%= @source.title %> will be added to <%= @target.title %></p>
+<% end -%>
+<p><%= @source.title %> will be deleted.</p>
+<p>Do you want to continue?</p>

@@ -1,0 +1,49 @@
+<%= render :partial => "reports/report_view", :locals => { :report => mpi.report }  %>
+
+<div id="show_specific" class="report">
+<table id="mpi_specific">
+  <tbody>
+    <tr>
+      <td id="col1" class="shaded">Current</td>
+      <td id="col2"><%= mpi.current %></td>
+      <td id="col3" class="shaded">Equipment</td>
+      <td id="col4"><%= mpi.equipment %></td>
+      <td id="col5" class="shaded">Powder</td>
+      <td id="col6"><%= mpi.type_of_powder %></td>
+      
+    </tr>
+    <tr>
+      <td class="shaded">UV light</td>
+     	<td><%= mpi.uv_light %></td>
+      <td class="shaded">Batch</td>
+     	<td><%= mpi.batch_number %></td>
+      <td class="shaded">Field</td>
+      <td><%= mpi.field_strength %></td>
+    </tr>
+    <tr>
+      
+     	<td class="shaded">White light</td>
+     	<td><%= mpi.white_light %></td>
+      <td class="shaded">Pole spacing</td>
+      <td><%= mpi.pole_spacing %></td>
+      <td class="shaded">Contrast</td>
+      <td><%= mpi.contrast %></td>
+    </tr>
+		<tr>
+
+		</tr>
+
+  </tbody>
+</table>
+</div>
+<div id="report_description">
+	<%= mpi.report.description.html_safe %>
+</div>
+
+<%= render :partial => "reports/accept_reject", :locals => { :report => mpi.report } %>
+
+<table id="defects_table" class="report text_center">
+	<% if mpi.mpi_defects.any? %>
+		<%= render :partial => "reports/mpis/defects_rows.html.erb", :locals => {:mpi => mpi}  %>
+	<% end %>
+</table>

@@ -1,0 +1,8 @@
+$('#modal').modal('hide');
+var el = $('#<%= params[:element] %>');
+var value = el.val();
+el.val(value + ' <%= @image.id %>');
+el.closest('.image_row').after('<%= j render "cropped_image" %>');
+
+// $('<%= "#destructive_#{params[:model]}_attributes_image_id" %>').val(<%= @image.id %>);
+// $('#<%= params[:model] %>_image_row td:first').html('<%= j render "cropped_image" %>');

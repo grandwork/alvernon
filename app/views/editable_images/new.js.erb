@@ -1,0 +1,9 @@
+$('#modal_header').text('Upload Image');
+$('#modal_submit').hide();
+  $('#modal_body').html('<%= j render "form" %>');
+  $('#modal_submit').click(function(evt) {
+    evt.preventDefault();
+    });
+$('#modal_close').text('Cancel');
+$('#new_editable_image').fileupload();
+$('#modal').modal('show');

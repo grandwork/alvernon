@@ -1,0 +1,30 @@
+<div class="normal_content">
+
+	<% if false  %><!-- hide "Deleted users" button -->
+		<div class="btn-group">
+			<%= link_to "<i class='icon-trash'></i> #{pluralize(@deleted, 'deleted user')}".html_safe, deleted_users_path, :class => "btn" %>
+		</div>
+	<% end -%>
+
+	<% unless @pending.any? or @employees.any? or @admins.any? or @clients.any? %>
+		<h1>You are the only user here.</h1>
+	<% end -%>
+
+ 	<% if @pending.any? %>
+ 		<%= render 'users/pending_users_table' %>
+	<% end %>
+	
+	<% if @employees.any? %>
+		<%= render 'users/users_table' %>
+	<% end %>
+	
+ 	<% if @admins.any? %>
+ 		<%= render 'users/admins_table' %>
+	<% end %>
+
+	<% if @clients.any? %>
+		<%= render 'users/clients_table' %>
+	<% end -%>
+</div>
+
+<%= render 'shared/generic_modal' %>

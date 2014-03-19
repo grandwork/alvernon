@@ -1,0 +1,6 @@
+<div class="user_menu_buttons btn-toolbar">
+  <div class="btn-group">
+    <%= link_to '<i class="icon-edit"></i> Edit Report'.html_safe, [:edit, :reports, specific], :class => "btn btn-small" %>
+    <%= link_to '<i class="icon-trash icon-white"></i> Delete Report'.html_safe, [:reports, specific], :confirm => "Are you sure?", :method => :delete, :class => "btn btn-danger btn-small"   %>
+  </div>
+</div><!-- END .user_menu_buttons -->

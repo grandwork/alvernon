@@ -1,0 +1,6 @@
+$('#modal').addClass('wide-modal');
+$('#modal_header').text('Flashes for report #<%= @rt.uid %>');
+$('#modal_submit').replaceWith('<%= escape_javascript(link_to "Print", "/reports/rt/#{@rt.id}/flashes.pdf", target: "_blank", class: "btn btn-primary") %>');
+$('#modal_body').html('<%= escape_javascript(render "flash") %>');
+$('#modal_close').text('Close');
+$('#modal').modal('show');

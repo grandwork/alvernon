@@ -1,0 +1,12 @@
+<% mpi ||= @specific %>
+
+<%= render "reports/menu", specific: mpi %>
+
+<div id="report_show" class="report">
+	<%= render "header", :mpi => mpi  %>
+  
+  <%= render "body", :mpi => mpi %>
+
+  <%= render 'footer', :user => mpi.report.user, :report => mpi.report %>
+
+</div><!-- END #report_show -->

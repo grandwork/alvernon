@@ -1,0 +1,25 @@
+
+  <% unless @client.approved? %>
+    <div class="btn-group">
+		<%= link_to '<i class="icon-ok icon-white"></i> Approve'.html_safe, approve_client_path(@client), method: :put, class: 'btn btn-small btn-success' %>
+	
+		<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			Merge with...
+			<span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			<% @client.class.all.each do |c| %>
+				<% unless @client == c %>
+				<li>
+					<%= link_to c.title, "/merge_client/#{@client.id}/with/#{c.id}", remote: true %>
+				</li>
+				<% end -%>
+			<% end -%>
+		</ul>
+	</div>
+  <% end -%>
+
+  <ul class="button-group">
+  	<li><%= link_to '<i class="fa fa-pencil-square-o"></i> Edit Client'.html_safe, edit_client_path(@client), :class => "button small secondary tiny" %></li>
+  	<li><%= link_to '<i class="fa fa-trash-o"></i> Delete Client'.html_safe, @client, :confirm => "Are you sure?", :method => :delete, :class => "button alert small tiny"   %></li>
+  </ul>  

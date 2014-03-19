@@ -1,0 +1,13 @@
+<%= link_to '<i class="fa fa-plus"></i> Add User'.html_safe, new_user_invitation_path, class: 'button success radius small' %>
+<dl class="sub-nav">
+  <dt>Show:</dt>
+  <dd id="manage_technicians"><%= link_to "Technicians (#{User.tech_count})", admin_technicians_path %></dd>
+  <dd id="manage_admin"><%= link_to "Admins (#{User.admin_count})", admin_admins_path %></dd>
+  <dd id="manage_clients"><%= link_to client_user_count, admin_clients_path %></dd>
+  <% if @pending_count > 0 %>
+		<dd id="manage_pending"><%= link_to "Pending (#{User.pending_count})", admin_pending_path %></dd>
+	<% end -%>
+	<% if @suspended_count > 0 && current_user.super_admin? %>
+		<dd id="manage_suspended"><%= link_to "Suspended (#{User.suspended_count})", admin_suspended_path %></dd>
+	<% end -%>	
+</dl>

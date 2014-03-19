@@ -1,0 +1,55 @@
+<div class="main_content">
+    <%= form_for current_user, :method => :put, :url => '/update_account', :html => { :class => "form-horizontal" } do |f| %>
+    
+    <!-- <div class="control-group">
+      <%= f.label :first_name, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :first_name, :class => "input-small" %>
+      </div>  
+    </div>
+    
+    <div class="control-group">
+      <%= f.label :last_name, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :last_name, :class => "input-small" %>
+      </div>  
+    </div> -->
+
+    <h5 class="form_title">Signature Image</h5>
+    <p>A digital image of your signature will be inserted into every 
+      report you create. The image should be no larger than 110x42px.</p>
+    <% if current_user.signature.blank? %>
+  		<div class="clearfix">
+  			<%= f.label :signature, "Upload your signature:" %>
+        <%= f.hidden_field :signature_cache %>
+  			<%= f.file_field :signature, :class => "xxlarge" %>
+  		</div>
+  	<% else %> 
+  		<div class="clearfix">
+  	    
+  	    <div class="input">
+  	      	
+  	    </div>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <p>Your current signature:</p>
+            <%= image_tag current_user.signature_url.to_s %>
+            <%= link_to '<i class="fa fa-trash-o"></i> Remove Signature'.html_safe, '/remove_signature/', :method => :put, :class => "button alert tiny" %>
+          </div>
+        </div>  
+
+
+  	    
+  	  </div> 
+  	<% end %> <!-- current signature -->
+  
+  <div class="row">
+    <div class="large-12 columns">
+      <%= f.submit "Update Signature", :class => "button small radius success" %>  
+    </div>
+  </div>
+	  
+	
+<% end %><!-- form_for current_user -->
+</div>

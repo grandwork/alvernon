@@ -1,0 +1,56 @@
+<div class="modal hide" id="new_emails">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3 id="modal_header">Save emails for future reference</h3>
+  </div>
+  <div class="modal-body" id="emails_editor_body">
+    <p>Select which email belongs to which client</p>
+    <form class="form-horizontal">
+      <% @new_emails.each do |email| %>
+      <div class="control-group">
+        <label class="control-label xlarge" for="select_<%= email %>" style="width: 50%;">
+          <%= email %>&nbsp;&nbsp;&nbsp;
+        </label>
+
+        <div class="control-group">
+          <select id="select_<%= email %>" data-email="<%= email %>">
+            <option value=''>Don't save this email</option>
+            <%= @clients.each do |client| %>
+              <option value="<%= client %>"><%= client %></option>
+            <% end %>
+          </select>
+        </div>
+
+      </div>
+      <% end -%>
+    </form>
+  </div>
+  
+  <div class="modal-footer">
+    <a href="#" class="btn" id="new_emails_close" data-dismiss="modal">Don't save anything</a>
+    <a href="#" class="btn btn-primary" id="new_emails_submit">Save</a>
+  </div>
+</div>
+
+<script>
+    console.log('lol');
+    $('#new_emails').modal('show');
+    $('#new_emails_submit').click(function(evt) {
+      evt.preventDefault();
+      data = [];
+      $('select').each(function(index) {
+        data.push({
+          email: $(this).data('email'),
+          client: $(this).val()
+        });
+      });
+      console.log(data);
+      $.post('emails/new_emails', { data: data});
+    });
+    var close = function(evt) {
+      evt.preventDefault();
+      $.post('emails/clear_new_emails');
+    };
+    $('#new_emails_close').click(close);
+    $('#new_emails button.close').click(close);
+</script>

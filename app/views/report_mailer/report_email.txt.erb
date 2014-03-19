@@ -1,0 +1,16 @@
+Dear Customer,
+
+The <%= @report.specific_type.upcase %> report #<%= @report.specific.uid %> from
+Canyon State Inpection is complete. You can find it in the attached PDF file.
+
+Please reply to this e-mail address: <%= @sender.email %>
+
+Please do not reply to this message via e-mail. This address is automated, 
+unattended and cannot help with questions or requests.
+
+
+
+Best regards,
+<%= @sender.full_name %>
+<%= @sender.email %>
+Canyon State Inpection

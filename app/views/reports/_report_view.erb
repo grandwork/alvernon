@@ -1,0 +1,55 @@
+<div id="show_generic" class="report"> 
+<table id="report_show_generic_top">
+  <tbody>
+
+    <tr>
+      <td class="shaded">Project</td>
+      <td><%= report.title %></td>
+
+      <td class="shaded" id="col3">Date</td>
+      <td id="col4"><%= report.date.strftime("%d-%m-%Y") %></td>
+    </tr>
+
+    <tr>
+      <td class="shaded" id="col1">Client</td>
+      <td id="col2"><%= report.client %></td>
+      
+      <td class="shaded">Job Number</td>
+      <td><%= report.job_number %></td>
+      
+    </tr>
+    <tr>
+      <td class="shaded">Drawing?</td>
+      <td></td>
+      <td class="shaded">Location</td>
+      <td><%= report.location %></td>
+      
+    </tr>
+    
+    <tr>
+      <td class="shaded">Part No.?</td>
+      <td></td>
+      <td class="shaded">Client No.?</td>
+      <td></td>
+    </tr>
+      
+    <tr>
+      <td class="shaded">Procedure</td>
+      <td><%= report.procedure %></td>
+      
+      <td class="shaded">Material?</td>
+      <td></td>
+    </tr>
+    
+    <tr>
+      <td class="shaded">Acceptance</td>
+      <td><%= report.code %></td>
+      <td class="shaded">Surface?</td>
+      <td></td>
+    </tr>
+    
+  </tbody>
+</table>    
+
+
+</div>

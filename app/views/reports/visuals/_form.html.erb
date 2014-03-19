@@ -1,0 +1,25 @@
+<%= form_for [:reports, @visual], :html => { :class => "test" } do |f| %>
+  
+	<% errors_as_alerts(@visual) %>
+	<%= render :partial => "reports/report_form", :locals => { :f => f }  %>
+
+  <div class="row">
+    <div class="large-6 columns">
+      <label>Items</label>
+      <table class="full_width">          
+          <%= f.fields_for :visual_lines do |lines_form| %>
+            <%= render :partial => 'lines_edit_table', :locals => { :f  => lines_form }  %>
+          <% end %> 
+          <tr><td><%= link_to_new_visual_line_fields f.object, f %></td></tr>
+      </table>
+    </div>
+  </div>
+
+	<div class="row">
+    <div class="large-6 columns">
+	   <%= f.submit :class => "button success radius small" %>
+    </div> 
+	</div>
+	
+<% end %>
+

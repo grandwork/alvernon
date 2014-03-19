@@ -1,0 +1,21 @@
+<thead>
+	<tr>
+	  <td class="shaded" colspan="7">Ultrasonic Probes</td>
+	</tr>
+	<tr>
+		<td class="shaded">Angle</td>
+		<td class="shaded">Serial number</td>
+		<td class="shaded">Frequency</td>
+		<td class="shaded">Type/Size</td>
+		<td class="shaded">Ref dB</td>
+	</tr>
+</thead>
+<% ut.ut_probes.each do |probe| %>
+	<tr class="<%= cycle("odd", "even", :name => "row_class") %> fields">
+		<td><%= probe.angle %>&nbsp;&deg;</td>
+		<td><%= probe.serial %></td>
+		<td><%= probe.frequency %>&nbsp;MHz</td>
+		<td><%= probe.probe_type %></td>
+		<td><%= probe.ref %>&nbsp;dB</td>
+	</tr>
+<% end %>

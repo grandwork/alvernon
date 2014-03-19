@@ -1,0 +1,60 @@
+<div class="main_content">
+
+	<% if @unapproved.any? %>
+	<h5 class="form_title">Clients Awaiting Approval</h5>
+		<table class="">
+			<thead>
+		  		<tr>
+		  			<th>Client (Reports)</th>
+		  			<th>Date Added</th>
+		  			<th>Actions</th>
+		  		</tr>
+		  	</thead>
+			<tbody>
+		  	<% @unapproved.each do |client| %>
+		    	<%# render 'client_row', client: client %>
+		    	<tr>
+		    		<td><%= link_to client.name, client_path(client) %> (<%= client.reports.count %>)</td>
+						<td><%= client.created_at %></td>
+		    		<td>	
+							<%= link_to '<i class="fa fa-check"></i> Approve'.html_safe, approve_client_path(client), method: :put, class: 'button tiny success' %>
+							<a href="#" data-dropdown="drop" class="button dropdown tiny">Merge with...</a><br>
+							<ul id="drop" data-dropdown-content class="f-dropdown">
+								<% client.class.all.each do |c| %>
+									<% unless client == c %>
+										<li><%= link_to c.name, "/merge_client/#{client.id}/with/#{c.id}", remote: true %></li>
+									<% end -%>
+								<% end -%>
+							</ul>
+						</td>
+		    <% end -%>
+	   	</tbody>
+		</table>
+<% end -%>
+
+	<% if @approved.any? %>
+		<%= paginate @approved %>
+		<h5 class="form_title">Approved Clients</h5>
+		  <table class="">
+		  	<thead>
+		  		<tr>
+		  			<th>Client (Reports)</th>
+		  			<th>Date Added</th>
+		  		</tr>
+		  	</thead>
+		    <tbody>
+		    	<% @approved.each do |client| %>
+		    		<%# render 'client_row', client: client %>
+		    		<tr>
+							<td><%= link_to client.name, client_path(client) %> (<%= client.reports.count %>)</td>
+							<td><%= client.created_at %></td>
+						</tr>	
+		    	<% end -%>
+	    	</tbody>
+		  </table>
+			<%= paginate @approved %>
+<% end -%>
+
+<%= link_to '<i class="fa fa-plus"></i> Add Client Company'.html_safe, new_client_path, class: 'button success radius small' %>
+</div>
+<%= render 'shared/generic_modal' %>

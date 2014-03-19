@@ -1,0 +1,76 @@
+<% unless current_user.client %>
+<ul class="side-nav">
+  <li class="active"><a href="#">Link 1</a></li>
+  <li><a href="#">Link 2</a></li>
+  <li class="divider"></li>
+  <li><a href="#">Link 3</a></li>
+  <li><a href="#">Link 4</a></li>
+
+  
+      <li class="nav-header">Reports</li>
+      <li>
+        <a href="/">Home</a>
+      </li>
+<% if @stats %>
+
+      <li>
+        <a href="/reports/user?q=<%= current_user.id %>">All your reports (<%= @total_number_of_user_reports %>)</a>
+      </li>
+      <li>
+        <a href="/reports/all">All reports (<%= @stats.all_reports %>)</a>
+      </li>
+      <li>
+        <a href="/reports/ut_reports">All UT reports (<%= @stats.ut_reports %>)</a>
+      </li>
+      <li>
+        <a href="/reports/mt_reports">All MT reports (<%= @stats.mt_reports %>)</a>
+      </li>
+      <li>
+        <a href="/reports/pt_reports">All PT reports (<%= @stats.pt_reports %>)</a>
+      </li>
+      <li>
+        <a href="/reports/rt_reports">All RT reports (<%= @stats.rt_reports %>)</a>
+      </li>
+      <li>
+        <a href="/reports/et_reports">All ET reports (<%= @stats.et_reports %>)</a>
+      </li>
+      <li>
+        <a href="/reports/gt_reports">All GT reports (<%= @stats.gt_reports %>)</a>
+      </li>
+      <li>
+        <a href="/reports/dt_reports">All DT reports (<%= @stats.dt_reports %>)</a>
+      </li>
+      <li class="nav-header">Most active projects</li>
+        <li>
+          <a href="/reports/work_order?q=<%= u @stats.most_active_project %>"><%= @stats.most_active_project %> (<%= @stats.most_active_project_count %>)</a>
+        </li>
+        <li>
+          <a href="/reports/work_order?q=<%= u @stats.second_active_project %>"><%= @stats.second_active_project %> (<%= @stats.second_active_project_count %>)</a>
+        </li>
+        <li>
+          <a href="/reports/work_order?q=<%= u @stats.third_active_project %>"><%= @stats.third_active_project %> (<%= @stats.third_active_project_count %>)</a>
+        </li>
+      <li class="nav-header">Most active clients</li>
+        <li>
+          <a href="/reports/client?q=<%= @stats.most_active_client %>"><%= @stats.most_active_client %> (<%= @stats.most_active_client_count %>)</a>
+        </li>
+        <li>
+          <a href="/reports/client?q=<%= @stats.second_active_client %>"><%= @stats.second_active_client %> (<%= @stats.second_active_client_count %>)</a>
+        </li>
+        <li>
+          <a href="/reports/client?q=<%= @stats.third_active_client %>"><%= @stats.third_active_client %> (<%= @stats.third_active_client_count %>)</a>
+        </li>
+      <li class="nav-header">Most active users</li>
+        <li>
+          <a href="/reports/user?q=<%= @stats.most_active_user_id %>"><%= @stats.most_active_user_name %> (<%= @stats.most_active_user_count %>)</a>
+        </li>
+        <li>
+          <a href="/reports/user?q=<%= @stats.second_active_user_id %>"><%= @stats.second_active_user_name %> (<%= @stats.second_active_user_count %>)</a>
+        </li>
+        <li>
+          <a href="/reports/user?q=<%= @stats.third_active_user_id %>"><%= @stats.third_active_user_name %> (<%= @stats.third_active_user_count %>)</a>
+        </li>
+    
+  <% end -%>
+  </ul>
+<% end -%>

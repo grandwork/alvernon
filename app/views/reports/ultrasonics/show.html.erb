@@ -1,0 +1,12 @@
+<% ut ||= @specific %>
+
+<%= render 'reports/menu', specific: ut %>
+
+<div id="report_show" class="report">
+	<%= render "header", :ut => ut  %>
+  
+  <%= render "body", :ut => ut, :report => ut.report %>
+
+  <%= render 'footer', :user => ut.report.user, :report => ut.report %>
+
+</div><!-- END #report_show -->

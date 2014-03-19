@@ -1,0 +1,76 @@
+<%= form_for [:reports, @mpi], :html => { :class => "form-horizontal report-form", data: { checkclient: 'true'} } do |f| %>
+  
+	<% errors_as_alerts(@mpi) %>
+
+	<%= render :partial => "reports/report_form", :locals => { :f => f }  %>
+
+  <div class="row-fluid">
+    <fieldset class="generic">
+      <legend>MPI Specific</legend>
+        <div class="span4">
+          
+            <%= f.label :equipment, :class => "alt_label" %>
+            <%= f.text_field :equipment, :class => "input-large", 'data-autocomplete' => 'mpi' %>
+            <span class="help-block">Type of magnet / bench unit.</span>
+          
+
+            <%= f.label :type_of_powder, :class => "alt_label" %>
+            <%= f.text_field :type_of_powder, :class => "input-large", 'data-autocomplete' => 'mpi' %>
+          
+
+            <%= f.label :current, :class => "alt_label" %>
+            <%= f.text_field :current, :class => "input-large", 'data-autocomplete' => 'mpi' %>
+            
+         
+            <%= f.label :contrast, :class => "alt_label" %>
+            <%= f.text_field :contrast, :class => "input-large", 'data-autocomplete' => 'mpi' %>
+          
+          
+            <%= f.label :field_strength, :class => "alt_label" %>
+            <%= f.text_field :field_strength, :class => "input-large", 'data-autocomplete' => 'mpi' %>
+
+        </div>
+        <div class="span4">
+            <%= f.label :pole_spacing, :class => "alt_label" %>
+            <%= f.text_field :pole_spacing, :class => "input-large", 'data-autocomplete' => 'mpi' %>
+
+          
+            <%= f.label :uv_light, :class => "alt_label" %>
+            <%= f.text_field :uv_light, :class => "input-large", 'data-autocomplete' => 'mpi' %>
+            <span class="help-block">UV light reading at inspection site.</span>
+          
+
+            <%= f.label :white_light, :class => "alt_label" %>
+            <%= f.text_field :white_light, :class => "input-large", 'data-autocomplete' => 'mpi' %>
+            <span class="help-block">White light reading at inspection site.</span>
+          
+          
+            <%= f.label :batch_numbers, :class => "alt_label" %>
+            <%= f.text_field :batch_number, :class => "input-large", 'data-autocomplete' => 'mpi' %>  
+        </div>  
+        
+    </fieldset>    
+  </div>  
+  
+  <fieldset class="generic">
+    <legend>Defects</legend>
+      <div class="span9">
+
+      	<table>
+      		<tfoot>
+      			<tr><td colspan="6"><%= link_to_new_mpi_defect_fields f.object, f %></td></tr>
+      		</tfoot>
+      		<%= f.fields_for :mpi_defects do |defects_form| %>
+      			<%= render :partial => 'defects_edit_table', :locals => { :f	=> defects_form }  %>
+      		<% end %> 
+        </table>                                        
+        
+      </div>
+    </fieldset>  
+	
+	<div class="input">
+	  <%= f.submit :class => "btn btn-success btn-large" %> or
+	  <%= link_to '<i class="icon-remove icon-white"></i> Cancel'.html_safe, :root, :class => "btn btn-small btn-danger" %>
+	</div>
+	
+<% end %>

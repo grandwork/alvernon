@@ -1,0 +1,9 @@
+<tr class="<%= cycle("odd", "even", :name => "row_class") %> fields">
+	<td><%= f.text_field :scope, :class => "input-mini", :placeholder => "ID" %></td>
+	<td><%= f.text_field :start, :class => "input-mini", :placeholder => "Start" %></td>
+	<td><%= f.text_field :length, :class => "input-mini", :placeholder => "Length" %></td>
+	<td><%= f.text_field :defect_type, :class => "input-mini", :placeholder => "Type" %></td>
+	<td><%= f.text_field :result, :class => "input-mini", :placeholder => "Result" %></td>
+	<td><%= f.hidden_field :_destroy %>
+	<%= link_to '<i class="icon-trash icon-white"></i> Remove Defect'.html_safe, nil, :onclick => "remove_fields(this);", :remote => true, :class => "btn btn-danger btn-small" %></td>
+</tr>

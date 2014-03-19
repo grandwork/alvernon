@@ -1,0 +1,9 @@
+<tr class="<%= cycle("odd", "even", :name => "row_class") %> fields">
+	<td><%= f.text_field :angle, :class => "input-mini", :placeholder => "Angle" %></td>
+	<td><%= f.text_field :serial, :class => "input-mini", :placeholder => "Serial #" %></td>
+	<td><%= f.text_field :frequency, :class => "input-mini", :placeholder => "Frequency" %></td>
+	<td><%= f.text_field :probe_type, :class => "input-mini", :placeholder => "Type & Size" %></td>
+	<td><%= f.text_field :ref, :class => "input-mini", :placeholder => "Ref dB" %></td>
+	<td><%= f.hidden_field :_destroy %>
+	<%= link_to '<i class="icon-trash icon-white"></i> Remove Probe'.html_safe, nil, :onclick => "remove_fields(this);", :remote => true, :class => "btn btn-danger btn-small" %></td>
+</tr>

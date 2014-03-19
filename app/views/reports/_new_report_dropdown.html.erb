@@ -1,0 +1,11 @@
+<li>
+  <a href="#" data-dropdown="drop" class="button tiny dropdown"><i class="fa fa-files-o"></i> Template</a><br>
+    <ul id="drop" data-dropdown-content class="f-dropdown">
+      <li><%= link_to "Visual (VT)", new_reports_visual_path(from: report.id) %></li>
+      <li><%# link_to "Magnetic Particle (MT)", new_reports_mpi_path(from: report.id) %></li>
+      <li><%# link_to "Liquid Penetrant (PT)", new_reports_pt_path(from: report.id) %></li>
+      <li><%# link_to "Eddy Current (ET)", new_reports_et_path(from: report.id) %></li>
+      <li><%# link_to "Ultrasonic (UT)", new_reports_ultrasonic_path(from: report.id) %></li>
+      <li><%# link_to "Radiography (RT)", new_reports_radiographic_path(from: report.id) %></li>
+    </ul>
+</li>

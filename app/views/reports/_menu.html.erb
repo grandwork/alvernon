@@ -1,0 +1,50 @@
+<div class="button-bar user_menu_buttons">
+  <ul class="button-group">
+    <% if @can_manage %>
+      <li><%= link_to '<i class="fa fa-pencil-square-o"></i> Edit'.html_safe, [:edit, :reports, specific], :class => "tiny button" %></li>
+      <% if current_user.admin? %>
+        <li><%= link_to '<i class="fa fa-trash-o"></i> Delete'.html_safe, [:reports, specific], :confirm => "Are you sure?", :method => :delete, :class => "tiny button alert"   %></li>
+      <% end -%>
+    <% end %>
+    <li><%= link_to '<i class="fa fa-download"></i> PDF'.html_safe, params.merge(format: :pdf), :class => "tiny button" %></li>
+    <%# link_to '<i class="icon-envelope"></i> Email Report'.html_safe, '#', :class => "btn btn-tiny", :id => "toggle_email_form" %>
+    <% unless current_user.client %>
+      <% if @emails_cart.has? specific.report.id %>
+        <li>
+          <a class="tiny button email_btn remove_email_report active" href="#" data-report="<%= specific.report.id %>"><i class="fa fa-envelope-o"></i> Email</a>
+        </li>
+      <% else %>
+        <li>
+          <a class="button tiny email_btn add_email_report" href="#" data-report="<%= specific.report.id %>"><i class="fa fa-envelope-o"></i> Email</a>
+        </li>
+      <% end -%>
+    <% end -%>
+    <%= render 'reports/new_report_dropdown', report: specific.report unless current_user.client %>
+    <% if specific.class.name == "Radiographic" && specific.rt_defects.any? && !current_user.client %>
+      <%= link_to '<i class="icon-film"></i> Generate Flash'.html_safe, flashes_reports_radiographic_path(specific), remote: true, class: "button small" %>
+    <% end -%>
+  </ul>
+</div>
+
+
+<div class="modal hide fade in" id="email_form">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Email Report</h3>
+  </div>
+  <div class="modal-body" style="position: relative;">
+    <%= form_tag "/send_via_email/#{specific.report.id}", :method => :post  do %>
+      <p><%# text_for_mailing specific.report.last_time_mailed %></p>
+      <label>Enter the email address</label>
+      <%# email_field_tag :email, '', 'data-client-emails' => "#{specific.report.customer_id}" %>
+      <a href="#" id="show_all_emails" title="Show all emails" class="btn btn-small"><i class="icon-chevron-down"></i></a>
+      <label for="cc" class="checkbox">
+      <%= check_box_tag :cc %> Send me a copy
+      </label>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+      <%= submit_tag "Send Email", :class => "btn btn-primary" %>
+    </div>
+    <% end %>
+  </div>
+</div>

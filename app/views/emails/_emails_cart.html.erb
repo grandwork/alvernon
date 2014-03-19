@@ -1,0 +1,9 @@
+<div id="emails_cart">
+	<% if @emails_cart.any? %>
+  	<div class="alert">
+    	<p>You have <%= pluralize @emails_cart.reports_count, 'report' %> waiting to be emailed.</p>
+    	<a href="#" id="review_emails_cart" class="button small" data-reveal-id="emails_editor"><i class="icon-edit"></i> Review & Email</a>
+  	</div>
+	<% end -%>
+</div>
+

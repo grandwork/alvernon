@@ -1,0 +1,5 @@
+$('#modal_header').text('Deleting user');
+$('#modal_submit').replaceWith('<%= escape_javascript(link_to "Delete", "/delete_user/#{@user.id}", method: :delete, class: "btn btn-danger") %>');
+$('#modal_close').text('Cancel');
+$('#modal_body').html('<%= escape_javascript(render "users/user_delete_dialog") %>');
+$('#modal').modal('show');

@@ -1,0 +1,81 @@
+<%= form_for [:reports, @pt], :html => { :class => "form-horizontal report-form", data: { checkclient: 'true'} } do |f| %>
+  
+	<% errors_as_alerts(@pt) %>
+
+	<%= render :partial => "reports/report_form", :locals => { :f => f }  %>
+
+  <div class="row-fluid">
+    <fieldset class="generic">
+      <legend>Liquid Penetrant Specific</legend>
+       <div class="span4">
+            
+            <label class="alt_label">Lighting</label>
+            <%= f.text_field :light, :class => "input-large", 'data-autocomplete' => 'pt' %>
+            <span class="help-block">Light meter reading at inspection location</span>
+
+          
+            <%= f.label :uv_light, 'Ultraviolet Light', :class => "alt_label" %>
+            <%= f.text_field :uv_light, :class => "input-large", 'data-autocomplete' => 'pt' %>
+            <span class="help-block">UV Light meter reading at inspection location</span>
+
+
+            <label class="alt_label">Dwell Time</label>
+            <%= f.text_field :penetration_time, :class => "input-large", 'data-autocomplete' => 'pt' %>
+
+          
+            <%= f.label :developer_time, :class => "alt_label" %>
+            <%= f.text_field :developer_time, :class => "input-large", 'data-autocomplete' => 'pt' %>
+
+          
+
+            <%= f.label :pre_clean, :class => "alt_label" %>
+            <%= f.text_field :pre_clean, :class => "input-large", 'data-autocomplete' => 'pt' %>
+            <span class="help-block">Yes or No</span>
+            
+       </div>
+       <div class="span4">
+          
+            <%= f.label :temperature, :class => "alt_label" %>
+            <%= f.text_field :temperature, :class => "input-large", 'data-autocomplete' => 'pt' %>
+            <span class="help-block">Surface temp at inspection location</span>
+
+          
+
+            <%= f.label :dye_product, :class => "alt_label" %>
+            <%= f.text_field :dye_product, :class => "input-large", 'data-autocomplete' => 'pt' %>
+            <span class="help-block">Product Name / Batch Number</span>
+
+          
+            <%= f.label :dev_product, :class => "alt_label" %>
+            <%= f.text_field :dev_product, :class => "input-large", 'data-autocomplete' => 'pt' %>
+            <span class="help-block">Product Name / Batch Number</span>
+          
+          
+            <%= f.label :cleaner_product, :class => "alt_label" %>
+            <%= f.text_field :cleaner_product, :class => "input-large", 'data-autocomplete' => 'pt' %>
+            <span class="help-block">Product Name / Batch Number</span>
+          
+       </div>  
+    </fieldset>    
+  </div>
+
+  <fieldset class="generic">
+    <legend>Defects</legend>
+      <div class="span9">
+        <table>
+          <tfoot>
+            <tr><td colspan="9"><%= link_to_new_pt_defect_fields f.object, f %></td></tr>
+          </tfoot>
+          <%= f.fields_for :pt_defects do |defects_form| %>
+            <%= render :partial => 'defects_edit_table', :locals => { :f  => defects_form }  %>
+          <% end %> 
+        </table>                       
+      </div>
+  </fieldset>
+	
+	<div class="input">
+	  <%= f.submit :class => "btn btn-success btn-large" %> or
+	  <%= link_to '<i class="icon-remove icon-white"></i> Cancel'.html_safe, :root, :class => "btn btn-small btn-danger" %>
+	</div>
+	
+<% end %>

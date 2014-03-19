@@ -1,0 +1,13 @@
+<%= render :partial => "reports/report_view", :locals => { :report => visual.report }  %>
+
+<div id="report_description">
+	<%= visual.report.description.html_safe %>
+</div>
+
+<%= render :partial => "reports/accept_reject", :locals => { :report => visual.report } %>
+
+<table id="defects_table" class="report">
+  <% if visual.visual_lines.any? %>
+    <%= render :partial => "reports/visuals/rows", :formats => [:html, :erb], :locals => {:visual => visual}  %>
+  <% end %>
+</table>

@@ -1,0 +1,45 @@
+<% user ||= @user %> 
+<% pt ||= @specific %>
+<table id="signatures_table" class="report">
+  <tbody>
+    <tr>
+      <td id="report_show_technician" class="shaded">Technician</td>
+      <td id="report_show_customer" class="shaded">Customer</td>
+      <td id="report_show_authority" class="shaded">Inspection Authority</td>
+    </tr> 
+    <tr> 
+      <td>
+        <%= user.full_name %> 
+          <% if report.qualification %>
+            <%= report.qualification.name %>
+            Level <%= report.qualification.level %>
+            <%= report.qualification.number %>
+          <% end -%>  
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td id="signature_cell">
+      	<% if user.signature.blank? %>
+					<%= image_tag "signature_default.png", :alt => "signature", :id => "signature" %>
+				<% else %>
+				  <%= image_tag user.signature_url.to_s, :alt => "signature", :id => "signature" %>
+				<% end %>
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td id="stamp_cell">
+      	<%= image_tag 'stamp.jpg' %>
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<div id="pdfkit-paging" class="text_center">
+	Liquid Penetrant Report #<%= pt.uid %> 
+	<%= render :partial => 'reports/footer_address' %>
+</div>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <%= wicked_pdf_stylesheet_link_tag "application" %>
+	<script type="text/javascript">
+		window.onload = function getPdfInfo() {
+			document.getElementById('pdfkit-paging').style.display = 'block';
+			var pdfInfo = {};
+      var x = document.location.search.substring(1).split('&');
+      for (var i in x) { var z = x[i].split('=',2); pdfInfo[z[0]] = unescape(z[1]); }
+      var page = pdfInfo.page || 1;
+      var pageCount = pdfInfo.topage || 1;
+      document.getElementById('pdfkit_page_current').textContent = page;
+      document.getElementById('pdfkit_page_count').textContent = pageCount;
+    }
+	</script>
+</head>
+<body style="margin: 0; padding: 0; background-color: white;">
+	<%= yield %>
+  <script type="text/javascript">
+    var body = document.body,
+        html = document.documentElement;
+
+    var height = Math.max(body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+    var pages = Math.ceil(height/1530)
+    document.getElementById('page_count').textContent = pages;
+  </script>
+</body>
+</html>

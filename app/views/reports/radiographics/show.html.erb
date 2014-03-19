@@ -1,0 +1,14 @@
+<% rt ||= @specific %>
+
+<%= render 'reports/menu', specific: rt %>
+
+<div id="report_show" class="report">
+	<%= render "header", :rt => rt  %>
+  
+  <%= render "body", :rt => rt %>
+
+  <%= render 'footer', :user => rt.report.user, :report => rt.report %>
+
+  <%= render 'shared/generic_modal' %>
+
+</div><!-- END #report_show -->

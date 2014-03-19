@@ -1,0 +1,90 @@
+<%= form_for [:reports, @rt], :html => { :class => "form-horizontal report-form", data: { checkclient: 'true'} } do |f| %>
+  
+	<% errors_as_alerts(@rt) %>
+
+	<%= render :partial => "reports/report_form", :locals => { :f => f }  %>
+
+  <div class="row-fluid">
+    <fieldset class="generic">
+      <legend>Specific Information</legend>
+        <div class="span4">
+          
+
+            <%= f.label :equipment, :class => "alt_label" %>
+            <%= f.text_field :equipment, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+          
+
+            <%= f.label :film_type, :class => "alt_label" %>
+            <%= f.text_field :film_type, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+
+          
+            <%= f.label :lead_thickness, :class => "alt_label" %>
+            <%= f.text_field :lead_thickness, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+
+          
+            <%= f.label :density, :class => "alt_label" %>
+            <%= f.text_field :density, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+          
+          
+            <%= f.label :sensitivity, :class => "alt_label" %>
+            <%= f.text_field :sensitivity, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+          
+        
+            <%= f.label :sfd_ffd, "SFD/FFD", :class => "alt_label" %>
+            <%= f.text_field :sfd_ffd, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+          
+          
+        </div>
+        
+        <div class="span4">
+          
+  
+            <%= f.label :technique, :class => "alt_label" %>
+            <%= f.text_field :technique, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+          
+
+            <%= f.label :source_size, :class => "alt_label" %>
+            <%= f.text_field :source_size, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+
+          
+            <%= f.label :iqi_type, "IQI Type", :class => "alt_label" %>
+            <%= f.text_field :iqi_type, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+
+          
+            <%= f.label :iqi_position, "IQI Position", :class => "alt_label" %>
+            <%= f.text_field :iqi_position, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+          
+          
+            <%= f.label :exposure_data, :class => "alt_label" %>
+            <%= f.text_field :exposure_data, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+          
+          
+            <%= f.label :ug, :class => "alt_label" %>
+            <%= f.text_field :gu, :class => "input-large", 'data-autocomplete' => 'radiographic' %>
+            <span class="help-block">Geometric unsharpness.</span>
+
+
+        </div>   
+    </fieldset>    
+  </div>
+  
+  <fieldset class="generic">
+    <legend>Defects</legend>
+      <div class="span9">
+        <table>
+          <tfoot>
+            <tr><td colspan="9"><%= link_to_new_rt_defect_fields f.object, f %></td></tr>
+          </tfoot>
+          <%= f.fields_for :rt_defects do |defects_form| %>
+            <%= render :partial => 'defects_edit_table', :locals => { :f  => defects_form }  %>
+          <% end %> 
+        </table>                       
+      </div>
+	</fieldset>
+	
+	<div class="input"> <!-- this is duplicated across all reports -->
+	  <%= f.submit :class => "btn btn-success btn-large" %> or
+	  <%= link_to '<i class="icon-remove icon-white"></i> Cancel'.html_safe, :root, :class => "btn btn-small btn-danger" %>
+	</div>
+	
+<% end %>

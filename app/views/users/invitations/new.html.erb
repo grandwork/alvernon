@@ -1,0 +1,32 @@
+<%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
+<% errors_as_alerts(resource) %>
+<%= render :partial => 'shared/flash_messages' %>
+
+<fieldset>
+    <legend>Invite a new user</legend>
+
+    <%# f.select :role, options_for_select(%w(technician client), :include_blank => "Select One") %>
+    <%= f.select :role, options_for_select([["Choose which type of user", ""], "Technician", "Client" ]) %>
+    
+    <div id="client_select" style="display:none;">
+      <%= f.select :client_id, Client.select_options, {}, {:disabled => true} %>
+    </div>
+    
+    
+
+    <div class="row collapse">
+      <div class="small-3 large-2 columns">
+        <span class="prefix"><i class="fa fa-envelope-o fa-fw"></i></span>
+      </div>
+      <div class="small-9 large-10 columns">
+        <%= f.email_field :email, placeholder: "", :disabled => true %>
+      </div>
+    </div>
+
+    <div class="row collapse">
+    		<%= f.submit "Send Invitation", :class => "button success radius small" %>
+    		<%= link_to "Nevermind, take me back", after_sign_in_path_for(resource_name), class: 'button tiny secondary radius' %>
+    </div>
+<% end %>
+
+

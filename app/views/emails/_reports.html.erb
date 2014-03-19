@@ -1,0 +1,69 @@
+<div class="table_container">
+  <table class="">
+    <tbody>
+      <thead>
+        <tr>
+          <td class="report_num_col">Report #</td>
+          <td></td>
+          <td></td>
+          <td>Project Title</td>
+          <td>Part</td>
+          <td>Drawing #</td>
+          <td>Client</td>
+          <td>Client Order #</td>
+          <td>Technician</td>
+          <td>Updated</td>
+          <td></td>
+        </tr>
+      </thead>
+    <% reports.each do |report| %>
+      <tr>
+        <td class="report_number">
+          <span class="label"><%= report.specific.uid %></span>
+        </td>
+        <td>
+          <% if report.last_time_mailed %>
+            <i class="icon-envelope" rel="tooltip" title="<%= text_for_mailing(report.last_time_mailed) %>"></i>
+          <% end -%>
+        </td>
+        <td>
+          <% if report.specific.class.name == "Destructive" %>
+            <% if report.specific.approved_at != nil %>
+               <span class="label label-accept" rel="tooltip" title="Approved <%= distance_of_time_in_words_to_now(report.specific.approved_at) %> ago by <%= User.find(report.specific.approved_by).full_name %>">AP</span>
+            <% else -%>
+              <span class="label label-reject" rel="tooltip" title="Not Arroved Yet">AP</span>
+            <% end %>
+          <% else %>
+            <% if report.reject? %>
+              <span class="label label-reject" rel="tooltip" title="Reject">R</span>
+            <% end -%>
+            <% if report.accept? %>
+              <span class="label label-accept" rel="tooltip" title="Accept">A</span>
+            <% end -%>
+          <% end -%>
+        </td>
+        <td>
+            <%= link_to truncate(report.title, :length => 27), [:reports, report.specific], target: '_blank' %>
+        </td>
+        <% if report.specific.class.name == "Destructive" %>
+          <td><%= truncate(report.specific.part_name, :length => 23) %></td>
+        <% else %>
+          <td><%# truncate(report.part_number, :length => 23) %></td>
+        <% end %>
+        <% if report.specific.class.name == "Destructive" %>
+          <td><%= truncate(report.specific.drawing_number, :length => 23) %></td>
+        <% else %>
+          <td><%# truncate(report.drawing_number, :length => 23) %></td>
+        <% end %>
+        <td><%= client_link_to truncate(report.client, :length => 27), "/reports/client?q=#{u report.client}", target: "_blank" %></td>
+        <td><%# link_to truncate(report.work_order_number, :length => 19), "/reports/work_order?q=#{u report.work_order_number}", target: "_blank" %></td>
+        <td><%= client_link_to truncate(report.user.full_name, :length => 19), "/reports/user?q=#{report.user.id}", target: "_blank" %></td>
+        <td><small><%= time_ago_in_words(report.updated_at) %> ago</small></td>
+        <td>
+          <a href="#" class="editor_remove_report btn btn-danger btn-mini" data-report="<%= report.id %>"><i class="icon-remove icon-white"></i></a>
+        </td>
+      </tr>
+    <% end %> 
+  </tbody>
+  </table>
+</div>  

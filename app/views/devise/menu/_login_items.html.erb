@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+	<div id="user_meta">
+	  Signed in as <strong><%= current_user.email %></strong>
+	  <%= link_to "Home", :root, :class => "btn small" %> 
+		<%= link_to "Account", :account, :class => "btn small" %>
+	  <%= link_to('Sign-Out', destroy_user_session_path, :method => :delete, :class => "btn small") %> 
+	</div><!-- END #user_meta -->
+<% end %>

@@ -1,0 +1,13 @@
+<!-- i think we can delete this whole view -->
+
+<a id="report_menu_dropdown" onclick="reportMenu(); return false;" href="#" class="btn small">
+  <%= "New Report" %> <span>▼</span> 
+</a>
+<div id="report_menu_list" style ="display:none;">
+  <ul>
+	  <li><%= link_to "Magnetic Particle", new_reports_mpi_path %></li>
+	  <li><%= link_to "Liquid Penetrant" %></li>	  
+	  <li><%= link_to "Manual Ultrasonic" %></li>	  
+	</ul>
+</div>  
+

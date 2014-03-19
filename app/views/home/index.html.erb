@@ -1,0 +1,15 @@
+<div class="main_content" id="user_latest_reports">
+  <h5 class="form_title">Your most recent reports</h5>
+  <%= render 'reports/report_list', reports: @my_latest_reports %>
+</div>
+
+<div class="main_content" id="latest_reports">
+  <div class="page_header">
+    <h1>The last 20 reports edited by everyone</h1>
+  </div>
+  <%= render 'reports/report_list', reports: @latest_reports %>
+</div>
+
+<% unless @new_emails.blank? %>
+  <%= render 'new_emails' %>
+<% end -%>

@@ -1,0 +1,50 @@
+<%= render :partial => "reports/report_view", :locals => { :report => pt.report }  %>
+
+<div id="show_specific" class="report">
+<table id="pt_specific" class="report">
+  
+  <tbody>
+    <tr>
+      <td id="col1" class="shaded">Light</td>
+      <td id="col2"><%= pt.light %></td>
+      <td id="col3" class="shaded">UV Light</td>
+      <td id="col4"><%= pt.uv_light %></td>
+      <td id="col5" class="shaded">Pre Clean</td>
+      <td id="col6"><%= pt.pre_clean %></td>
+    </tr>
+    <tr>
+      <td class="shaded">Dwell Time</td>
+     	<td><%= pt.penetration_time %></td>
+      <td class="shaded">Dev Time</td>
+      <td><%= pt.developer_time %></td>
+      <% if pt.batch == "N/A" || pt.batch.blank? %> <!-- support legacy batch attribute -->
+        <td class="shaded">Dye Product</td>
+     	  <td><%= pt.dye_product %></td>
+   	  <% else %>
+     	  <td class="shaded">Batch</td>
+   	    <td><%= pt.batch %></td>
+     	<% end %>  
+    </tr>
+    <tr>
+      <td class="shaded">Dev Product</td>
+      <td><%= pt.dev_product %></td>
+      <td class="shaded">Clean Product</td>
+      <td><%= pt.cleaner_product %></td>
+      <td class="shaded">Surface Temp</td>
+      <td><%= pt.temperature %></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div id="report_description">
+	<%= pt.report.description.html_safe %>
+</div>
+
+<%= render :partial => "reports/accept_reject", :locals => { :report => pt.report } %>
+
+<table id="defects_table" class="report">
+  <% if pt.pt_defects.any? %>
+    <%= render :partial => "reports/pts/defects_rows.html.erb", :locals => {:pt => pt}  %>
+  <% end %>
+</table>

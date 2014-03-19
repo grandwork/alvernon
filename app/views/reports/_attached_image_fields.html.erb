@@ -1,0 +1,15 @@
+
+	<%= image_form.label :image %>
+	<% if image_form.object.image.blank? %>
+		<%= image_form.hidden_field :image_cache %>
+		<%= image_form.file_field :image, :class => "xxlarge" %><br/>
+	<% else %>
+		<%= image_tag image_form.object.image_url.to_s %>
+	<% end %>
+
+	<%= image_form.label :description, "Image description:" %><br/>
+	<%= image_form.text_area :description, :rows => '3', :class => "input-xxlarge editor" %><br/>
+	<%= image_form.hidden_field :_destroy %>
+	<%= link_to "Remove this image", nil, :onclick => "remove_fields(this);", :remote => true, :class => "btn btn-danger btn-small"  %><br/>
+
+	

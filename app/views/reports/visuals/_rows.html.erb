@@ -1,0 +1,22 @@
+<thead>
+	<tr>
+		<td width="85" class="shaded">Area</td>
+		<td width="85" class="shaded">Level</td>
+		<td width="85" class="shaded">Quantity</td>
+		<td width="80" class="shaded">Result</td>
+		<td width="135" class="shaded">Non-Conformances</td>
+		<td width="256" class="shaded">Comments</td>
+	</tr>
+</thead>
+<% visual.visual_lines.each do |line| %>
+	<tr class="<%= cycle("odd", "even", :name => "row_class") %> fields">
+		<td><%= line.area %></td>
+		<td><%= line.level %></td>
+		<td><%= line.quantity %></td>
+		<td class="<%= accept_or_reject_class(line) %>">
+			<%= VisualLine::VISUAL_LINE_RESULTS[line.result.to_i] %>
+		</td>
+		<td><%= line.defect %></td>
+		<td><%= line.comments %></td>
+	</tr>
+<% end %>

@@ -1,0 +1,12 @@
+<% if @user.reports.any? %>
+	<p><%= @user.full_name %> has the following reports:</p>
+	<ul>
+		<% @user.reports[0...5].each do |r| %>
+			<li><%= link_to r.uid, [:reports, r.specific], target: "_blank" %></li>
+		<% end -%>
+		<% if @user.reports.count > 5 %>
+			<li>...and <%= @user.reports.count - 5 %> more</li>
+		<% end -%>
+	</ul>
+<% end -%>
+<p>Do you want to delete <%= @user.full_name %>? If you do, the user will be logged out immediately.</p>

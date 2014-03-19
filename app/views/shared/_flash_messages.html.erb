@@ -1,0 +1,12 @@
+<% if notice && notice.length > 0 %>
+  <div data-alert class="alert-box success radius">
+		<%= notice %>
+		<a href="#" class="close">&times;</a>
+	</div>
+<% end %>
+<% if alert && alert.length > 0 %>
+  <div data-alert class="alert-box alert radius">
+		<%= alert %>
+		<a href="#" class="close">&times;</a>
+  </div>
+<% end %> 

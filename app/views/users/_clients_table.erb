@@ -1,0 +1,19 @@
+<%= paginate @clients %>
+<div class="main_content">
+  <h5 class="form_title">Client Users</h5>
+  <table class="condensed-table bordered-table zebra-striped">
+    <tbody>
+      <% @clients.each do |u| %>
+        <tr>
+          <td><%= mail_to u.email %></td>
+          <td> from <%= link_to u.client.name, u.client %></td>
+          <td> Invitation accepted <%= distance_of_time_in_words_to_now(u.invitation_accepted_at) %> ago</td> 
+          <td>
+            
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= paginate @clients %>

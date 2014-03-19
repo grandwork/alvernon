@@ -1,0 +1,27 @@
+<% unless current_user.client %>
+<div class="main_content">
+	<%= render 'menu' unless current_user.client %>
+
+	<p>
+		<%= @client.name %> - 
+		<%= @client.address %>
+	</p>
+	
+</div>
+<% end -%>
+
+
+<% if @reports %>
+	<%= paginate @reports %>
+	<div class="main_content">
+		<div class="page_header">
+			<h1>All reports for <%= @client.name %></h1>
+		</div>
+		<%= render 'reports/report_list', reports: @reports %>
+	</div>
+	<%= paginate @reports %>
+<% else %>
+	<p>There are no reports for this client yet.</p>
+<% end -%>
+
+<%= render 'shared/generic_modal' %>

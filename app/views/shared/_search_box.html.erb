@@ -1,0 +1,6 @@
+<div id="search_container">
+  <%= form_tag("/search", :method => "get", :class => "navbar-search") do %>
+    <%= text_field_tag(:q, @q ||= "") %>
+    <%= submit_tag("Search", :class => "btn small", :id => "search_submit_button") %>
+  <% end %>
+</div>  

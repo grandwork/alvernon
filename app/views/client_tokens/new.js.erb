@@ -1,0 +1,10 @@
+$('#modal_header').text('Grant access');
+$('#modal_submit').text('Grant access');
+$('#modal_close').text('Cancel');
+$('#modal_body').html('<p>This will generate a unique link that will give <%= @email %> access to the reports for this client. <%= escape_javascript(render "client_tokens/form") %>')
+$('#modal').modal('show');
+$('#modal_submit').click(function() {
+	$('input#email').val('<%= @email %>');
+	$('.invisible-form').submit();
+});
+	

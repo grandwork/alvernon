@@ -1,0 +1,52 @@
+<%= render :partial => "reports/report_view", :locals => { :report => rt.report }  %>
+
+<table id="rt_specific" class="report">
+  
+  <tbody>
+    <tr>
+      <td class="shaded" id="col1">Equipment</td>
+      <td id="col2"><%= rt.equipment %></td>
+      <td class="shaded" id="col3">Film Type</td>
+      <td id="col4"><%= rt.film_type %></td>
+      <td class="shaded" id="col5">Lead Thick.</td>
+      <td id="col6"><%= rt.lead_thickness %></td>
+    </tr>
+    <tr>
+      <td class="shaded">Density</td>
+     	<td><%= rt.density %></td>
+      <td class="shaded">Sensitivity</td>
+      <td><%= rt.sensitivity %></td>
+      <td class="shaded">SFD/FFD</td>
+      <td><%= rt.sfd_ffd %></td>
+    </tr>
+    <tr>
+      <td class="shaded">Technique</td>
+      <td><%= rt.technique %></td>
+      <td class="shaded">Source Size</td>
+      <td><%= rt.source_size %></td>
+      <td class="shaded">Exposure Data</td>
+      <td><%= rt.exposure_data %></td>
+    </tr>
+    <tr>
+      <td class="shaded">IQI Type</td>
+      <td><%= rt.iqi_type %></td>
+      <td class="shaded">IQI Position</td>
+      <td><%= rt.iqi_position %></td>
+      <td class="shaded">UG</td>
+      <td><%= rt.gu %></td>
+    </tr>
+
+  </tbody>
+</table>
+
+<div id="report_description">
+	<%= rt.report.description.html_safe %>
+</div>
+
+<%= render :partial => "reports/accept_reject", :locals => { :report => rt.report } %>
+
+<table id="rt_defects_table" class="report">
+  <% if rt.rt_defects.any? %>
+    <%= render :partial => "reports/radiographics/defects_rows.html.erb", :locals => {:rt => rt}  %>
+  <% end -%>
+</table>

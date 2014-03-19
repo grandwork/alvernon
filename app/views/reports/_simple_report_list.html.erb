@@ -1,0 +1,7 @@
+<ul>
+	<% reports.each do |report| %>
+		<li>
+			<%= link_to report.uid, [:reports, report.specific], target: "_blank" %>
+		</li>
+	<% end -%>
+</ul>

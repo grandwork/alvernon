@@ -1,0 +1,20 @@
+<% if @my_reports.any? %>
+<div class="normal_content">
+  <h2>Your recent reports:</h2>
+  	<% @user_latest_reports.each do |report| %>
+  		<tr>
+  		  <td><%= report.specific.uid %></td>
+  		  <td><%= link_to truncate(report.title, :length => 30), [:reports, report.specific] %></td>
+  		  <td><%= link_to truncate(report.client, :length => 23), "/reports/client?q=#{u report.client}" %></td>
+  		  <td><%= link_to truncate(report.work_order_number, :length => 19), "/reports/work_order?q=#{u report.work_order_number}" %></td>
+        <td><%= link_to truncate(report.user.full_name, :length => 19), "/reports/user?q=#{report.user.id}" %></td>
+  		  <td><%= distance_of_time_in_words_to_now(report.created_at) %> ago</td>
+  		  <td><%= edit_report_link(report) %> <%= delete_report_link(report) %></td>
+  		</tr>
+  	<% end %>
+  </tbody>	 
+  </table>
+</div>
+<% end %>
+
+

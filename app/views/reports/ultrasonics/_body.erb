@@ -1,0 +1,45 @@
+<%= render :partial => "reports/report_view", :locals => { :report => ut.report }  %>
+
+<table id="ut_specific" class="report">
+  <tbody>
+    <tr>
+      <td class="shaded" id="col1">Equipment/Sn.</td>
+      <td id="col2"><%= ut.equipment %></td>
+      <td class="shaded" col id="col3">Calibration Due</td>
+      <td id="col4"><%= ut.calibration_date %></td>
+      <td class="shaded" id="col5">Sensitivity</td>
+      <td id="col6"><%= ut.sensitivity %></td>
+    </tr>		
+    <tr>
+      <td class="shaded">Transfer Corr.</td>
+     	<td><%= ut.correction %> dB</td>
+      <td class="shaded">Couplant</td>
+      <td><%= ut.couplant %></td>
+      <td class="shaded">Cable/Length</td>
+      <td><%= ut.cable %></td>
+    </tr>
+    <tr>
+      <td class="shaded">Cal Block Sn</td>
+      <td><%= ut.cal_block %></td>
+    </tr>
+
+  </tbody>
+</table>
+
+<table id="ut_probes" class="report">
+  <% if ut.ut_probes.any? %>
+    <%= render partial: "reports/ultrasonics/probes_rows.html.erb", locals: { ut: ut} %>
+  <% end -%>
+</table>
+
+<div id="report_description">
+	<%= ut.report.description.html_safe %>
+</div>
+
+<%= render :partial => "reports/accept_reject", :locals => { :report => ut.report } %>
+
+<table id="ut_defects_table" class="report">
+  <% if ut.ut_defects.any? %>
+    <%= render :partial => "reports/ultrasonics/defects_rows.html.erb", :locals => {:ut => ut}  %>
+  <% end %>
+</table>

@@ -1,0 +1,60 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  date:
+    formats:
+      default: "%d.%m.%Y"
+  helpers:
+    submit:
+      mpi:
+        create: "Create MT Report"
+        update: "Update MT Report"
+      ultrasonic:
+        create: "Create UT Report"  
+        update: "Update UT Report"  
+      radiographic:
+        create: "Create RT Report"  
+        update: "Update RT Report" 
+      et:
+        create: "Create ET Report"
+        update: "Update ET Report"
+      pt:   
+        create: "Create PT Report"
+        update: "Update PT Report"
+      inspection:
+        create: "Create Generic Report"
+        update: "Update Generic Report"  
+      destructive:
+        create: "Create Destructive Testing Report"
+        update: "Update Destructive Testing Report"
+    label:
+      report:
+        procedure: "Procedure"
+        acceptance: "Acceptance"
+        date_of_inspection: "Date"
+        description: "Description"
+        client: "Client"
+        location: "Location"
+        drawing_number: "Drawing #"
+        part_number: "Part #"
+        serial_number: "Serial #"
+        title: "Title"
+        weld_number: "Weld ID"
+        welder: "Welder"
+        material: "Material"
+        dimension: "Dimension"
+        thickness: "Thickness"
+        surface_condition: "Surface"
+        welding_process: "Welding process"
+        joint_type: "Joint"
+        control_extent: "Control extent"
+        work_order_number: "Work order #"
+      mpi:
+        equipment: "Equipment"
+        type_of_powder: "Type of powder"
+        current: "Current"
+        contrast: "Contrast"
+        field_strength: "Field strength"
+        pole_spacing: "Pole spacing"
+           

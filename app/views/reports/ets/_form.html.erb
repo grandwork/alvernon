@@ -1,0 +1,73 @@
+<%= form_for [:reports, @et], :html => { :class => "form-horizontal report-form", data: { checkclient: 'true'} }  do |f| %>
+  
+	<% errors_as_alerts(@et) %>
+
+	<%= render :partial => "reports/report_form", :locals => { :f => f }  %>
+
+  <div class="row-fluid">
+    <fieldset class="generic">
+      <legend>ET Specific</legend>
+        <div class="span6">
+          
+
+            <%= f.label :equipment, :class => "alt_label" %>
+            <%= f.text_field :equipment, :class => "input-large", 'data-autocomplete' => 'et' %>
+          
+
+            <%= f.label :serial, "Serial Number", :class => "alt_label" %>
+            <%= f.text_field :serial, :class => "input-large", 'data-autocomplete' => 'et' %>
+            <span class="help-block">Equipment serial number.</span>
+          
+            <%= f.label :calibration_due, "Cal Due Date", :class => "alt_label" %>
+            <%# f.text_field :calibration_due, :class => "input-large", :value => l(f.object.calibration_due) %>
+            <%= f.text_field :calibration_due, :class => "input-large date_input" %>
+            <span class="help-block">Equipment calibration expiration date.</span>
+
+            <%= f.label :coating, "Coating thickness", :class => "alt_label" %>
+            <%= f.text_field :coating, :class => "input-large", 'data-autocomplete' => 'et' %>
+            <span class="help-block">Coating thickness measured with absolute probe.</span>
+
+
+            <%= f.label :calibration_block, :class => "alt_label" %>
+            <%= f.text_field :calibration_block, :class => "input-large", 'data-autocomplete' => 'et' %>
+          
+        </div>  
+    </fieldset>    
+  </div>  
+  
+  <fieldset class="generic">
+    <legend>Probes</legend>
+      <div class="span9">
+
+      	<table>
+      		<tfoot>
+      			<tr><td colspan="6"><%= link_to_new_et_probe_fields f.object, f %></td></tr>
+      		</tfoot>
+      		<%= f.fields_for :et_probes do |probes_form| %>
+      			<%= render :partial => 'probes_edit_table', :locals => { :f	=> probes_form }  %>
+      		<% end %> 
+        </table>                                        
+        
+      </div>
+    </fieldset>
+
+  <fieldset class="generic">
+    <legend>Defects</legend>
+    <div class="span9">
+      <table>
+        <tfoot>
+          <tr><td colspan="9"><%= link_to_new_et_defect_fields f.object, f %></td></tr>
+        </tfoot>
+        <%= f.fields_for :et_defects do |defects_form| %>
+          <%= render partial: 'defects_edit_table', locals: { f: defects_form } %>
+        <% end -%>
+      </table>
+    </div>
+  </fieldset>
+	
+	<div class="input">
+	  <%= f.submit :class => "btn btn-success btn-large" %> or
+	  <%= link_to '<i class="icon-remove icon-white"></i> Cancel'.html_safe, :root, :class => "btn btn-small btn-danger" %>
+	</div>
+	
+<% end %>

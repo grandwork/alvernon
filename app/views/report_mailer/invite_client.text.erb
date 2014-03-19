@@ -1,0 +1,10 @@
+Dear Customer,
+
+You can view your reports by following this link: <%= @link.nil? ? "<unique access link>" : @link %>
+
+Please reply to this email <%= @sender.email %>
+
+Best regards,
+<%= @sender.full_name %>
+<%= @sender.email %>
+Canyon State Inpection
